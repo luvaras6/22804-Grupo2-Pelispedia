@@ -1,0 +1,35 @@
+*{
+	font-family:'Roboto','Segoe UI';
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+	outline:none;
+	text-decoration:none;
+}
+
+html {
+  /* 62.5% hace que 1rem equivalga a 10px, facilita el calculo. */
+	font-size:62.5%; 
+	overflow-x:hidden;
+  color: var(--white);
+}
+body{
+  font-size: var(--FontSize-m);
+}
+a{
+  text-decoration: none;
+  color: var(--white);
+}
+
+/* agregar variables acá 👇🏽 */
+:root{
+  --primary-color:#4f62cd;
+  --secondary-color:#8D72E1;
+  --black:#13131a;
+  --white:#ffffff;
+
+  --FontSize-s: 1rem;
+  --FontSize-m: 1.5rem;
+  --FontSize-l: 2rem;
+  --FontSize-xl: 2.375rem;
+}
