@@ -1,11 +1,53 @@
 .nav {
-  text-align: center;
+  height: fit-content;
+  padding: 2rem;
+  display: flex;
+  border-radius: 0 0 10px 10px;
+  justify-content: space-between;
+  background: linear-gradient(180deg, #00000050 30%, #00000000 100%);
+  align-items: center;
 }
+
 .nav ul {
+  margin-top: 1rem;
   list-style: none;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-left: 0;
+  align-items: center;
 }
-.nav ul li {
-  margin: 0 2rem;
+
+@media screen and (max-width: 720px) {
+  .list {
+    flex-direction: column;
+  }
+}
+
+button {
+  padding: 0.5rem 1.5rem;
+  background-color: #00000000;
+  border: none;
+  border-radius: 5rem;
+}
+
+button:hover {
+  background-color: #00000050;
+  transition: 0.3s;
+}
+
+a {
+  text-decoration: none;
+  color: var(--white);
+}
+
+a:hover {
+  color: var(--white);
+}
+
+.search ul {
+  display: flex;
+}
+
+.search ul li {
+  padding: 1.5rem;
 }

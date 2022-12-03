@@ -1,24 +1,21 @@
-import styles from './Styles/App.module.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import styles from "./Styles/App.module.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import Navbar from './Components/Navbar';
+import Navbar from "./Components/Navbar";
 
-import Login from './Pages/Login';
-import SignUp from './Pages/SignUp';
-import Series from './Pages/Series';
-import Peliculas from './Pages/Peliculas';
+import Login from "./Pages/Login";
+import SignUp from "./Pages/SignUp";
+import Series from "./Pages/Series";
+import Peliculas from "./Pages/Peliculas";
 
-import { Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <div className={styles.App}>
       <header>
-        <Link className={styles.logo} to="/">
-          <h1 className={styles.logo}>Pelispedia</h1>
-        </Link>
+        <Navbar />
       </header>
-      <Navbar />
       <main className={styles.main}>
         {/* Ruteo de paginas */}
         <Routes>
