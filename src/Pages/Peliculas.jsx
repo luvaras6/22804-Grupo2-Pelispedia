@@ -1,11 +1,17 @@
 import React from 'react'
+import { PeliculasGrid } from '../Components/PeliculasGrid'
+import peliculas from '../peliculas.json'
 
-import styles from '../Styles/Peliculas.module.css'
 
 
 function Peliculas() {
+
+
+  console.log(peliculas);
   return (
-    <div className={styles.container}>Peliculas</div>
+    <>
+      <PeliculasGrid peliculas={peliculas} />
+    </>
   )
 }
 

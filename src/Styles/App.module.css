@@ -6,26 +6,24 @@
   flex-direction: column;
   color: var(--white);
 }
-.logo{
+
+.logo {
   color: var(--white);
   text-decoration: none;
   margin-top: 1rem;
   font-size: 3.3rem;
 }
-.nav{
+
+.nav {
   text-align: center;
 }
-.nav ul{
+
+.nav ul {
   list-style: none;
   display: flex;
   justify-content: center;
 }
-.nav ul li{
+
+.nav ul li {
   margin: 0 2rem;
-}
-.main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
