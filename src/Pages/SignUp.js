@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import styles from "../Styles/SignUp.module.css";
-
-import { auth } from '../firebase';
+//import { auth } from '../firebase';
+import Firebase, { db } from '../firebase';
+import {collection, getDocs, getDoc, query, doc, addDoc} from 'firebase/firestore';
+import {addUser} from './AddUser';
 
 function SignUp() {
 
@@ -16,11 +17,18 @@ function SignUp() {
     });
   };
 
+  // Reemplazo signUpuser por addFBUser, el problema es que el evento se dispara por cada caracter que se ingresa en password
+  // es decir, si pongo password '123' se generan 3 registros : 1,12,123; idem con el email
+
+  const addFBUser = () =>{
+    addUser(email,password);
+  };
+
   const signUpUser = (e) =>{
     e.preventDefault();
-    auth.createUserWithEmailAndPassword(email, password).then((auth) =>{
-        console.log(auth)
-        if(auth){
+    db.createUserWithEmailAndPassword(email, password).then((db) =>{
+        console.log(db)
+        if(db){
           history('/');
         }
     }).catch(err=>alert('No se encontró usuario'));
@@ -31,7 +39,8 @@ function SignUp() {
   const history = useNavigate();
 
   return (
-    <form className={`${styles.form} w-xs-90 w-lg-50`} onSubmit={handleSubmit}>
+    //<form className={`${styles.form} w-xs-90 w-lg-50`} onSubmit={handleSubmit}>
+    <form className={`${styles.form} w-xs-90 w-lg-50`}>
       <div className={styles.signup}>
         <h2>Registrate</h2>
       </div>
@@ -62,8 +71,8 @@ function SignUp() {
         <Link className={styles.signup} to="/">
           {"Ya posee una cuenta? Ingresar"}
         </Link>
-
-        <button type="submit" className={styles.btn} onClick={signUpUser}>
+        {/*<button type="submit" className={styles.btn} onClick={signUpUser()}>*/}
+        <button className={styles.btn} onClick={addFBUser()}>
           Crear
         </button>
       </div>

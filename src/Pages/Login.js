@@ -3,7 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 
 import styles from "../Styles/Login.module.css";
 
-import { auth } from '../firebase';
+//import { auth } from '../firebase';
+import Firebase, { db } from '../firebase';
+import {collection, getDocs, getDoc, query, doc, addDoc} from 'firebase/firestore';
 
 const Login = () => {
   const handleSubmit = (event) => {
@@ -17,7 +19,7 @@ const Login = () => {
 
   const signInUser = (e) => {
     e.preventDefault();
-    auth.signInWithEmailAndPassword(email, password).then((auth) => history('/')).catch(err=>alert('Error al ingresar'));
+  //  db.signInWithEmailAndPassword(email, password).then((db) => history('/')).catch(err=>alert('Error al ingresar'));
   }
 
   const [email, setEmail] = useState('');
