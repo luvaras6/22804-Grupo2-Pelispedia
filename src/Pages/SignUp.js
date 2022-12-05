@@ -1,29 +1,22 @@
 import React, {useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import styles from "../Styles/SignUp.module.css";
-
-import { auth } from '../firebase';
+import {addUser} from './AddUser';
 
 function SignUp() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-    email: data.get('email'),
-    password: data.get('password'),
-    });
-  };
-
-  const signUpUser = (e) =>{
-    e.preventDefault();
-    auth.createUserWithEmailAndPassword(email, password).then((auth) =>{
-        console.log(auth)
-        if(auth){
-          history('/');
-        }
-    }).catch(err=>alert('No se encontró usuario'));
+    try {
+      const data = new FormData(event.currentTarget);
+      addUser(email,password);
+      if(email && password){
+        history("/login")
+    }
+    } catch (error) {
+      alert("No se pudo crear el usuario")
+      // sweet alert
+    }
   };
 
   const [email, setEmail] = useState('');
@@ -41,6 +34,7 @@ function SignUp() {
         </label>
         <input 
         type="email" 
+        required
         className="form-control" 
         id="exampleInputEmail1"  
         value={email} 
@@ -52,6 +46,8 @@ function SignUp() {
         </label>
         <input
           type="password"
+          required
+          minlength="4"
           className="form-control"
           id="exampleInputPassword1"
           value={password}
@@ -62,8 +58,7 @@ function SignUp() {
         <Link className={styles.signup} to="/">
           {"Ya posee una cuenta? Ingresar"}
         </Link>
-
-        <button type="submit" className={styles.btn} onClick={signUpUser}>
+        <button type="submit" className={styles.btn} >
           Crear
         </button>
       </div>
