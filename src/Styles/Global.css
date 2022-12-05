@@ -27,7 +27,8 @@ a{
   --secondary-color:#8D72E1;
   --bg:linear-gradient(180deg, #0F2E66 0%, rgba(62, 64, 129, 0.9275) 50.52%, rgba(92, 62, 130, 0.84) 100%);
   --black:#13131a;
-  --white:#ffffff;
+  --white:#E0E0E0;
+  --background-web: linear-gradient(180deg, #4f62cd 0%, rgba(62, 64, 129, 0.9275) 50.52%, #8D72E1 100%);
 
   --FontSize-s: 1rem;
   --FontSize-m: 1.5rem;
