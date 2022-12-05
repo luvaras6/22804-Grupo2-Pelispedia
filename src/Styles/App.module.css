@@ -1,8 +1,8 @@
 .App {
-  background: var(--background-web);
-  padding: 0 2rem;
-  height: 100vh;
+  background: var(--bg);
+  /* padding: 0 2rem; */
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
   color: var(--white);
 }
@@ -26,4 +26,14 @@
 
 .nav ul li {
   margin: 0 2rem;
+}
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer{
+  text-align: center;
+  margin-bottom: 2rem;
 }
