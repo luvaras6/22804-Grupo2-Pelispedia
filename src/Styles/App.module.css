@@ -1,8 +1,8 @@
 .App {
-  background-color: var(--primary-color);
-  padding: 0 2rem;
-  height: 100vh;
+  background: var(--bg);
+  /* padding: 0 2rem; */
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
   color: var(--white);
 }
@@ -19,8 +19,11 @@
 }
 .main {
   flex: 1;
-  border: 2px solid;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.footer{
+  text-align: center;
+  margin-bottom: 2rem;
 }

@@ -25,6 +25,7 @@ a{
 :root{
   --primary-color:#4f62cd;
   --secondary-color:#8D72E1;
+  --bg:linear-gradient(180deg, #0F2E66 0%, rgba(62, 64, 129, 0.9275) 50.52%, rgba(92, 62, 130, 0.84) 100%);
   --black:#13131a;
   --white:#ffffff;
 
