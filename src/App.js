@@ -7,6 +7,7 @@ import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import Series from "./Pages/Series";
 import Peliculas from "./Pages/Peliculas";
+import { DetallePelicula } from './Pages/DetallePelicula';
 
 import { Route, Routes } from "react-router-dom";
 import About from './Pages/About';
@@ -27,6 +28,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/peliculas" element={<Peliculas />} />
+          <Route exact path="/peliculas/:idPelicula" element={<DetallePelicula />}></Route>
           <Route path="/series" element={<Series />} />
           <Route path="/about" element={<About />} />
         </Routes>
