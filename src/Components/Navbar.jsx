@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../Contexts/AuthContext';
 
 import Search from './Search'
 
 import styles from '../Styles/Navbar.module.css';
 
 function Navbar() {
-  const [LoggedIn, setLoggedIn] = useState(false)
+  const { signOut, currentUser } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    signOut();
+    navigate("/login");
+  }
+
+  const handleLogin = () => {
+    navigate("/login")
+  }
+
   return (
     <nav className={styles.nav}>
       <div>
@@ -25,14 +37,11 @@ function Navbar() {
               <h3>Series</h3>
             </Link></button>
           </li>
-          <li>{ LoggedIn &&<button type='button'>
-
-            {/* Cambiar el link al componente favoritos correspondiente */}
-
+          {/* <li>{ LoggedIn &&<button type='button'>
             <Link to="/favs">
               <h3>Favoritos</h3>
             </Link></button>}
-          </li>
+          </li> */}
         </ul>
       </div>
       <div className={styles.search}> 
@@ -41,17 +50,13 @@ function Navbar() {
 
             {/* Crear el routing del componente Login a /Login no a / */}
             
-            { !LoggedIn &&
-            <button type='button' onClick={()=>{setLoggedIn(!LoggedIn)}}>
-              <Link to={"/login"}>
-                <h3>Login</h3>
-              </Link>
+            { !currentUser &&
+            <button type='button' onClick={handleLogin}>
+                <h3>Log in</h3>
             </button>}
-            { LoggedIn &&
-            <button type='button' onClick={()=>{setLoggedIn(!LoggedIn)}}>
-              <Link to={"/signup"}>
+            { currentUser &&
+            <button type='button' onClick={handleLogOut}>
                 <h3>Log out</h3>
-              </Link>
             </button>}
           </li>
           <li><Search></Search></li>
