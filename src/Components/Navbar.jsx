@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
+import Search from './Search'
+
 import styles from '../Styles/Navbar.module.css';
 
 function Navbar() {
@@ -41,18 +43,18 @@ function Navbar() {
             
             { !LoggedIn &&
             <button type='button' onClick={()=>{setLoggedIn(!LoggedIn)}}>
-              <Link to={"/"}>
+              <Link to={"/login"}>
                 <h3>Login</h3>
               </Link>
             </button>}
             { LoggedIn &&
             <button type='button' onClick={()=>{setLoggedIn(!LoggedIn)}}>
-              <Link to={"/"}>
+              <Link to={"/signup"}>
                 <h3>Log out</h3>
               </Link>
             </button>}
           </li>
-          <li>SearchBar</li>
+          <li><Search></Search></li>
         </ul>
       </div>
     </nav>

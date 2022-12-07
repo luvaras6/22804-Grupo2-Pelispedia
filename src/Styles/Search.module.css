@@ -1,0 +1,19 @@
+.searchField {
+  display: flex;
+}
+
+button {
+  padding: 0.5rem 1.5rem;
+  background-color: #00000000;
+  border: none;
+  border-radius: 5rem;
+  text-decoration: none;
+  color: var(--white);
+}
+
+button:hover {
+  background-color: #00000050;
+  transition: 0.3s;
+  text-decoration: none;
+  color: var(--white);
+}
