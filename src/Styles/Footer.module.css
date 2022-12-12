@@ -1,8 +1,11 @@
 .container{
-  padding-top: 1rem;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: space-around;
+  font-size: var(--FontSize-m);
 }
 .copyright{
-  font-size: var(--FontSize-m);
+  font-size: var(--FontSize-s);
   margin: .5rem 0;
 }
 .divisor{
@@ -10,4 +13,11 @@
 }
 .link{
   text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
 }
