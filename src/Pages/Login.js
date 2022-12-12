@@ -1,27 +1,33 @@
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import styles from "../Styles/Login.module.css";
 
-import { auth } from '../firebase';
-import Firebase, { db } from '../firebase';
-import {collection, getDocs, getDoc, query, doc, addDoc} from 'firebase/firestore';
+//import { auth } from '../firebase';
+import Firebase, { db } from "../firebase";
+import { collection, getDocs, getDoc, query, doc, addDoc } from "firebase/firestore";
+import { useAuth } from "../Contexts/AuthContext";
 
 const Login = () => {
-  const handleSubmit = (event) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { currentUser, signIn } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    history("/peliculas")
+    try {
+      await signIn(email, password);
+    } catch (error) {
+      // console.log(error);
+    } finally {
+      navigate("/peliculas");
+    }
   };
 
-  const signInUser = (e) => {
-    e.preventDefault();
-  //  db.signInWithEmailAndPassword(email, password).then((db) => history('/')).catch(err=>alert('Error al ingresar'));
-  }
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const history = useNavigate();
+  useEffect(() => {
+    if (currentUser) return navigate("/peliculas", { replace: true });
+  }, []);
 
   return (
     <form className={`${styles.form} w-xs-90 w-lg-50`} onSubmit={handleSubmit}>
@@ -32,13 +38,14 @@ const Login = () => {
         <label htmlFor="exampleInputEmail1" className="form-label">
           Email
         </label>
-        <input 
-        type="email" 
-        className="form-control" 
-        required
-        id="exampleInputEmail1" 
-        onChange={e=>setEmail(e.target.value)} 
-        value={email} />
+        <input
+          type="email"
+          className="form-control"
+          required
+          id="exampleInputEmail1"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+        />
       </div>
       <div className={styles.inputPassword}>
         <label htmlFor="exampleInputPassword1" className="form-label">
@@ -46,7 +53,7 @@ const Login = () => {
         </label>
         <input
           value={password}
-          onChange={e=>setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           required
           type="password"
           className="form-control"
@@ -54,8 +61,10 @@ const Login = () => {
         />
       </div>
       <div className={styles.btnLink}>
-        <Link className={styles.signup} to="/SignUp">{"Aún no posee una cuenta? Crear"}</Link>
-        <button type="submit" className={styles.btn} >
+        <Link className={styles.signup} to="/SignUp">
+          {"Aún no posee una cuenta? Crear"}
+        </Link>
+        <button type="submit" className={styles.btn}>
           Ingresar
         </button>
       </div>
@@ -64,3 +73,4 @@ const Login = () => {
 };
 
 export default Login;
+

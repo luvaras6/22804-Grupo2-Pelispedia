@@ -1,15 +1,44 @@
+import React, { useEffect, useState } from 'react';
+import { get } from '../Services/httpClient';
 import { PeliculaCard } from "./PeliculaCard";
-import styles from "./PeliculasGrid.module.css"
+import styles from "./PeliculasGrid.module.css";
+import InfiniteScroll from 'react-infinite-scroll-component';
+import Error404 from '../Pages/Error404';
+import { Loader } from './Loader';
 
+export const PeliculasGrid = ({busqueda}) => {
+    const [ peliculas, setPeliculas ] = useState([]);
+    const [ cargando, setCargando ] = useState(true);
+    const [ pagina, setPagina ] = useState(1);
+    const [ hayMasPag, setHayMasPag ] = useState(true);
 
-export const PeliculasGrid = (props) => {
-    const peliculas = props.peliculas;
+    useEffect(()=>{
+        setCargando(true);
+        const busquedaUrl = busqueda ? "/search/movie?query=" + busqueda + "&page=" + pagina : "/discover/movie?page=" + pagina;
+        get(busquedaUrl)
+        .then(datos => {
+            setPeliculas(pagAnterior => pagAnterior.concat(datos.results));
+            setHayMasPag(datos.page < datos.total_pages);
+            setCargando(false);
+        });
+    }, [busqueda, pagina])
+
+    if(!cargando && peliculas.length === 0){
+        return <Error404 />
+    }
 
     return (
-        <>
+        <InfiniteScroll
+            dataLength={peliculas.length}
+            hasMore={hayMasPag}
+            next={()=> setPagina(pagAnterior => pagAnterior + 1)}
+            loader={<Loader />}
+        >
             <ul className={styles.peliculasGrid}>
-                {peliculas.map(p => (<PeliculaCard pelicula={p} key={p.id} />))}
+                {peliculas.map(pelicula => 
+                    <PeliculaCard key={pelicula.id} pelicula={pelicula} />
+                )}
             </ul>
-        </>
-    )
+        </InfiniteScroll>
+    );
 }
