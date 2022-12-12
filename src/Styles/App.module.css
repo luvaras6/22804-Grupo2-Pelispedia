@@ -27,12 +27,7 @@
 .nav ul li {
   margin: 0 2rem;
 }
-.main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 .footer{
   text-align: center;
   margin-bottom: 2rem;

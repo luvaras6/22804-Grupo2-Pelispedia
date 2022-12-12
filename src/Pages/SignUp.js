@@ -1,27 +1,36 @@
-import React, {useState} from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../Contexts/AuthContext";
 import styles from "../Styles/SignUp.module.css";
-import {addUser} from './AddUser';
 
 function SignUp() {
+  const [error, setError] = React.useState();
+  const [loading, setLoading] = React.useState(false);
 
-  const handleSubmit = (event) => {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const { signUp, currentUser } = useAuth();
+
+  // TODO: Redirigir al login
+  const navigate = useNavigate();
+
+  // TODO: Agregar validaciones
+  const handleSubmit = async (event) => {
+    setLoading(true);
     event.preventDefault();
+
     try {
-      const data = new FormData(event.currentTarget);
-      addUser(email,password);
-      if(email && password){
-        history("/login")
-    }
+      setError("");
+      await signUp(emailRef.current.value, passwordRef.current.value);
+      setLoading(false);
     } catch (error) {
-      alert("No se pudo crear el usuario")
-      // sweet alert
+      setError("Error, no se pudo registrar el nuevo usuario");
     }
   };
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const history = useNavigate();
+  useEffect(() => {
+    if (currentUser) return navigate("/peliculas", { replace: true });
+  }, []);
 
   return (
     <form className={`${styles.form} w-xs-90 w-lg-50`} onSubmit={handleSubmit}>
@@ -29,16 +38,17 @@ function SignUp() {
         <h2>Registrate</h2>
       </div>
       <div className={styles.input}>
+        {error && <h3>{error}</h3>}
         <label htmlFor="exampleInputEmail1" className="form-label">
           Email
         </label>
-        <input 
-        type="email" 
-        required
-        className="form-control" 
-        id="exampleInputEmail1"  
-        value={email} 
-        onChange={e=>setEmail(e.target.value)} />
+        <input
+          type="email"
+          required
+          className="form-control"
+          id="exampleInputEmail1"
+          ref={emailRef}
+        />
       </div>
       <div className={styles.inputPassword}>
         <label htmlFor="exampleInputPassword1" className="form-label">
@@ -47,18 +57,17 @@ function SignUp() {
         <input
           type="password"
           required
-          minlength="4"
+          minLength="4"
           className="form-control"
           id="exampleInputPassword1"
-          value={password}
-          onChange={e=>setPassword(e.target.value)}
+          ref={passwordRef}
         />
       </div>
       <div className={styles.btnLink}>
         <Link className={styles.signup} to="/">
           {"Ya posee una cuenta? Ingresar"}
         </Link>
-        <button type="submit" className={styles.btn} >
+        <button type="submit" className={styles.btn} disabled={loading}>
           Crear
         </button>
       </div>

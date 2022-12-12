@@ -1,0 +1,22 @@
+.contenedor{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: justify;
+}
+
+.columna{
+    max-width: 400px;
+    height: auto;
+    height: 80%;
+    margin: 15px;
+}
+
+.img{
+    border-radius: 5px;
+}
+
+.descripcion{
+    font-size: 1.5rem;
+}
