@@ -11,11 +11,9 @@ export default function Footer() {
       </div>
       <div className={styles.copyright}>Copyright © 2022 Pelispedia,Inc.</div>
       <div>
-        <Link to="/about" className={styles.link}>About us</Link>
+        <Link to="/about" className={styles.link}>Nosotros</Link>
         <b className={styles.divisor}>|</b>
-        <Link to="/" className={styles.link}>Peliculas</Link>
-        <b className={styles.divisor}>|</b>
-        <Link to="/series" className={styles.link}>Series</Link>
+        <Link to="/peliculas" className={styles.link}>Peliculas</Link>
       </div>
     </div>
   );

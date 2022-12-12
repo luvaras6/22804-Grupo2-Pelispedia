@@ -14,7 +14,7 @@ export default function Error404() {
         <h2>awww... No te preocupes.</h2>
         <p className={styles.error}>es solo un error 404!</p>
         <p>lo que busca puede haberse extraviado en la memoria a largo plazo</p>
-        <Link to="/" className={styles.volver}>↩ Volver</Link>
+        <Link to="/peliculas" className={styles.volver}>↩ Volver</Link>
       </div>
     </div>
   );
