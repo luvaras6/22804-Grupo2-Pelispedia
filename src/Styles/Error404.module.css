@@ -20,6 +20,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  font-size: var(--FontSize-l);
 }
 .text h2 {
   font-size: 3.5rem;

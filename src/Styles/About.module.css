@@ -8,6 +8,7 @@
 .text {
   width: 50%;
   margin: 2rem 0;
+  font-size: var(--FontSize-m);
 }
 .container_cards {
   width: 100%;
