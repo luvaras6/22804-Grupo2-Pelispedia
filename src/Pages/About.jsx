@@ -70,7 +70,7 @@ export default function About() {
                 backgroundColor: 'white',
                 padding: '.5rem',
                 border: 'none',
-                
+                bottom:'10rem'
               }} />
       </section>
     </div>

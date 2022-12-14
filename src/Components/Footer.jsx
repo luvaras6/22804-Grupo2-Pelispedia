@@ -9,7 +9,7 @@ export default function Footer() {
       <div>
         <Link to='/'>PELISPEDIA 🍿</Link>
       </div>
-      <div className={styles.copyright}>Copyright © 2022 Pelispedia,Inc.</div>
+      <copyright className={styles.copyright}>Copyright © 2022 Pelispedia,Inc.</copyright>
       <div>
         <Link to="/about" className={styles.link}>Nosotros</Link>
         <b className={styles.divisor}>|</b>
