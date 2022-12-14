@@ -12,11 +12,18 @@ export function DetallePelicula() {
     const [pelicula, setPelicula] = useState(null);
 
     useEffect(() => {
+        const controller = new AbortController();
         setCargando(true);
-        get("/movie/" + idPelicula).then(datos => {
+        get("/movie/" + idPelicula, controller).then(datos => {
             setPelicula(datos);
             setCargando(false);
+        }).catch((e)=>{
+            console.log(e)
         })
+
+        return () => {
+            controller.abort();
+        }
     }, [idPelicula]);
 
     if (cargando) {
