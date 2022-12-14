@@ -13,14 +13,21 @@ export const PeliculasGrid = ({busqueda}) => {
     const [ hayMasPag, setHayMasPag ] = useState(true);
 
     useEffect(()=>{
+        const controller = new AbortController();
         setCargando(true);
         const busquedaUrl = busqueda ? "/search/movie?query=" + busqueda + "&page=" + pagina : "/discover/movie?page=" + pagina;
-        get(busquedaUrl)
+        get(busquedaUrl, controller)
         .then(datos => {
             setPeliculas(pagAnterior => pagAnterior.concat(datos.results));
             setHayMasPag(datos.page < datos.total_pages);
             setCargando(false);
-        });
+        }).catch((e)=>{
+            console.log(e)
+        })
+
+        return () => {
+            controller.abort();
+        }
     }, [busqueda, pagina])
 
     if(!cargando && peliculas.length === 0){
