@@ -29,20 +29,24 @@ export function DetallePelicula() {
 
 
     const descargarInfo = () => {
-        html2canvas(document.getElementById("infoDescargar"), { backgroundColor: "#333333", allowTaint: false, useCORS: true }).then(function (canvas) {
+        html2canvas(document.getElementById("infoDescargar"), { backgroundColor: "#333333", allowTaint: false, useCORS: true })
+        .then(function (canvas) {
             const link = document.createElement("a");
             link.href = canvas.toDataURL();
-            link.download = "InfoPelicula/jpg"
+            link.alt = 'titulos-pelicula';
+            link.crossOrigin = 'Anonymous';
+            link.download = 'InfoPelicula.png';
             link.click();
         });
     }
 
-
     const imgUrl = obtenerPosterPelicula(pelicula.poster_path, 500);
+    
     return (
         <div className={styles.contenedor}>
             <div className={styles.contenedor} id="infoDescargar">
                 <img
+                    crossOrigin="true"
                     src={imgUrl}
                     alt="Imagen de la pelicula"
                     className={`${styles.columna} ${styles.img}`}
