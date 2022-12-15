@@ -1,9 +1,25 @@
 .contenedor{
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     text-align: justify;
+}
+
+.contenedorDescrBtn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: justify;
+}
+
+.contenedorbtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .columna{
@@ -19,4 +35,21 @@
 
 .descripcion{
     font-size: 1.5rem;
+}
+
+.btn{
+    background: var(--white);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 5%;
+    width: 30%;
+    font-size: 1.5rem;
+    font-weight: bolder;
+}
+.btn:hover{
+    background: white;
+    box-shadow: 1px 1px 3px rgb(49, 48, 48);
+    color: var(--primary-color);
 }

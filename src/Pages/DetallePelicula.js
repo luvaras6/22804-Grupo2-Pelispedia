@@ -40,9 +40,8 @@ export function DetallePelicula() {
         .then(function (canvas) {
             const link = document.createElement("a");
             link.href = canvas.toDataURL();
-            link.alt = 'titulos-pelicula';
-            link.crossOrigin = 'Anonymous';
             link.download = 'InfoPelicula.png';
+            link.crossOrigin = "true";
             link.click();
         });
     }
@@ -53,18 +52,22 @@ export function DetallePelicula() {
         <div className={styles.contenedor}>
             <div className={styles.contenedor} id="infoDescargar">
                 <img
-                    crossOrigin="true"
                     src={imgUrl}
                     alt="Imagen de la pelicula"
                     className={`${styles.columna} ${styles.img}`}
                 />
-                <div className={`${styles.columna} ${styles.descripcion}`}>
-                    <p><strong>Titulo: </strong>{pelicula.title}</p>
-                    <p><strong>Género: </strong>{pelicula.genres.map(genero => genero.name).join(", ")}</p>
-                    <p><strong>Descripción: </strong>{pelicula.overview}</p>
+                <div className={styles.contenedorPpal}>
+                    <div className={`${styles.columna} ${styles.descripcion}`}>
+                        <p><strong>Titulo: </strong>{pelicula.title}</p>
+                        <p><strong>Género: </strong>{pelicula.genres.map(genero => genero.name).join(", ")}</p>
+                        <p><strong>Descripción: </strong>{pelicula.overview}</p>
+                    </div>
+                    <div className={styles.contenedorbtn}>
+                        <button className={styles.btn} onClick={descargarInfo}>Descargar Info</button>
+                    </div>
+                    
                 </div>
             </div>
-            <button onClick={descargarInfo}>Descargar Info</button>
         </div>
 
     );
