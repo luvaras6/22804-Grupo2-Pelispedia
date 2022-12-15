@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaStar } from 'react-icons/fa';
 import { Link } from "react-router-dom";
 import { obtenerPosterPelicula } from '../Services/obtenerPosterPelicula';
 import styles from './PeliculasCard.module.css';
@@ -10,16 +11,17 @@ export const PeliculaCard = ({pelicula}) => {
     return (
         <li className={styles.peliculaCard}>
             <Link to={"/peliculas/" + pelicula.id}>
-                <img width={230} 
-                height={345} 
-                className={styles.peliculaImg} 
-                src={imgUrl} 
-                alt="Poster de la Pelicula" 
+                <img width={230}
+                    height={345}
+                    className={styles.peliculaImg}
+                    src={imgUrl}
+                    alt="Poster de la Pelicula"
                 />
-                <div className={styles.peliculaTitulo}>
-                    {pelicula.title}
-                </div>
             </Link>
+            <div className={styles.peliculaTitulo}>
+                {pelicula.title}
+                <FaStar color="#e0e0e0" size={18} className= {styles.iconStar} onClick={() => console.log("hola")} />
+            </div>
         </li>
     )
 }
