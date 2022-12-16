@@ -1,27 +1,49 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import styles from "../Styles/Login.module.css";
 
-//import { auth } from '../firebase';
-import Firebase, { db } from "../firebase";
-import { collection, getDocs, getDoc, query, doc, addDoc } from "firebase/firestore";
 import { useAuth } from "../Contexts/AuthContext";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const emailRef = useRef();
+  const passwordRef = useRef();
   const { currentUser, signIn } = useAuth();
   const navigate = useNavigate();
 
+  const [state, dispatch] = useReducer((state, action) => {
+    switch (action.type) {
+      case "LOGIN_START":
+        return {
+          error: null,
+          isLoading: true,
+        };
+      case "LOGIN_SUCCESS":
+        return {
+          error: null,
+          isLoading: false,
+        };
+      case "LOGIN_FAILED":
+        return {
+          error:
+            action.payload.code === "auth/wrong-password"
+              ? "Contraseña invalida"
+              : "Error, no se pudo ingresar a la cuenta",
+          isLoading: false,
+        };
+      default:
+        console.log("Invalid action");
+    }
+  }, {});
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    dispatch({ type: "LOGIN_START" });
     try {
-      await signIn(email, password);
-    } catch (error) {
-      // console.log(error);
-    } finally {
+      await signIn(emailRef.current.value, passwordRef.current.value);
+      dispatch({ type: "LOGIN_SUCCESS" });
       navigate("/peliculas");
+    } catch (error) {
+      dispatch({ type: "LOGIN_FAILED", payload: error });
     }
   };
 
@@ -34,37 +56,39 @@ const Login = () => {
       <div className={styles.login}>
         <h2>Inicia Sesión</h2>
       </div>
+      {state.error && <p>{state.error}</p>}
       <div className={styles.input}>
-        <label htmlFor="exampleInputEmail1" className="form-label">
+        <label htmlFor="email" className="form-label">
           Email
         </label>
         <input
           type="email"
           className="form-control"
           required
-          id="exampleInputEmail1"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
+          id="email"
+          ref={emailRef}
         />
       </div>
       <div className={styles.inputPassword}>
-        <label htmlFor="exampleInputPassword1" className="form-label">
+        <label htmlFor="password" className="form-label">
           Contraseña
         </label>
         <input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
           required
           type="password"
           className="form-control"
-          id="exampleInputPassword1"
+          id="password"
+          ref={passwordRef}
         />
       </div>
       <div className={styles.btnLink}>
         <Link className={styles.signup} to="/SignUp">
           {"Aún no posee una cuenta? Crear"}
         </Link>
-        <button type="submit" className={styles.btn}>
+        <Link className={styles.signup} to="/loginhelp">
+          {"¿Olvidaste tu contraseña?"}
+        </Link>
+        <button type="submit" className={styles.btn} disabled={state.isLoading}>
           Ingresar
         </button>
       </div>
@@ -73,4 +97,3 @@ const Login = () => {
 };
 
 export default Login;
-
