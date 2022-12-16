@@ -1,0 +1,46 @@
+.form {
+  padding: 6rem 4rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  font-size: 1.5rem;
+  max-width: 400px;
+  margin: auto;
+  display: grid;
+}
+
+.title {
+  margin-bottom: 2rem;
+  font-size: 2.3rem;
+  text-align: center;
+}
+
+.inputGroup {
+  margin-bottom: 3rem;
+}
+
+.loginLink {
+  color: var(--white);
+  text-decoration: none;
+  margin: auto;
+}
+
+.loginLink:hover {
+  color: white;
+}
+
+.btn {
+  background: var(--white);
+  color: var(--primary-color);
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  width: 50%;
+  font-size: 1.5rem;
+  font-weight: bolder;
+  margin: 0 auto 2rem;
+}
+
+.btn:hover {
+  background: white;
+  box-shadow: 1px 1px 3px rgb(49, 48, 48);
+}

@@ -1,5 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  updateEmail as authUpdateEmail,
+  updatePassword as authUpdatePassword,
+} from "firebase/auth";
 
 const AuthContext = React.createContext();
 
@@ -11,31 +18,37 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState();
 
-  const signUp = (email, password) => {
-    return auth.createUserWithEmailAndPassword(email, password);
+  const signUp = async (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  const signIn = (email, password) => {
-    return auth.signInWithEmailAndPassword(email, password);
+  const signIn = async (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const signOut = () => {
-    return auth.signOut();
+  const signOut = async () => {
+    return auth.signOut().catch((e) => e);
   };
 
-  const updateEmail = (email) => {
-    return auth.currentUser.updateEmail(email);
+  const resetPassword = async (email) => {
+    await sendPasswordResetEmail(auth, email);
   };
 
-  const updatePassword = (password) => {
-    return auth.currentUser.updatePassword(password);
+  const updateEmail = async (email) => {
+    return authUpdateEmail(currentUser, email);
+  };
+
+  const updatePassword = async (password) => {
+    return authUpdatePassword(currentUser, password);
   };
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
       setLoading(false);
       setCurrentUser(user);
     });
+    
+    return unsubscribe;
   }, []);
 
   const value = {
@@ -43,11 +56,14 @@ export function AuthProvider({ children }) {
     signIn,
     signUp,
     signOut,
+    resetPassword,
     updateEmail,
     updatePassword,
   };
 
-  return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
 }
-
-
