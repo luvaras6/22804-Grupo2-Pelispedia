@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import styles from "../Styles/Profile.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
+import { FindUser } from "./Firebasebackend"; 
 
 const Profile = () => {
   const [showAlert, setShowAlert] = useState(false);
-
+  
   const handleOnClose = (e) => {
     e.preventDefault();
     setShowAlert(false);
@@ -23,7 +24,8 @@ const Profile = () => {
   const showChangePasswordAlert = () => {
     setShowAlert("CHANGE_PASSWORD");
   };
-
+  // Obtengo los datos del usuario
+  
   return (
     <div className={styles.profileContainers}>
       <h2 className={styles.title}>Perfil</h2>

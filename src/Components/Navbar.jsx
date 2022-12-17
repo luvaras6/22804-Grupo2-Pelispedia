@@ -9,7 +9,6 @@ import Search from './Search'
 import styles from '../Styles/Navbar.module.css';
 
 
-
 function Navbar() {
   const { signOut, currentUser } = useAuth();
   const navigate = useNavigate();
@@ -43,7 +42,7 @@ function Navbar() {
             </Link></button>
           </li>
           {/* Para probar addFavorito*/}
-          <li>  <button type='button' onClick={() => addFavorito(currentUser.uid,'602269')}>
+          <li>  <button type='button' onClick={() => addFavorito(currentUser.uid,'527774')}>
                   <h3>Favoritos</h3>
                 </button>
           </li>

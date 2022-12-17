@@ -21,7 +21,7 @@ function SignUp() {
 
     try {
       setError("");
-      await signUp(emailRef.current.value, passwordRef.current.value);
+      await signUp(emailRef.current.value, passwordRef.current.value);      
       setLoading(false);
     } catch (error) {
       setError("Error, no se pudo registrar el nuevo usuario");

@@ -7,6 +7,8 @@ import {
   updateEmail as authUpdateEmail,
   updatePassword as authUpdatePassword,
 } from "firebase/auth";
+import Firebase,{ db } from '../firebase';
+import {collection, addDoc} from 'firebase/firestore';
 
 const AuthContext = React.createContext();
 
@@ -19,8 +21,22 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
 
   const signUp = async (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
-  };
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      const user = res.user;
+      await addDoc(collection(db, "usuarios"), {
+        "userId": user.uid,
+        "userEmail" : email,
+        "userNombre":"",
+        "userApellido":"",
+      });
+    }
+      catch (err) {
+        console.error(err);
+        alert(err.message);
+      }
+    }
+
 
   const signIn = async (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
@@ -41,7 +57,7 @@ export function AuthProvider({ children }) {
   const updatePassword = async (password) => {
     return authUpdatePassword(currentUser, password);
   };
-
+ 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setLoading(false);
