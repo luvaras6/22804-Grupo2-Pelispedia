@@ -2,7 +2,7 @@ import React from 'react';
 import { FaStar } from 'react-icons/fa';
 import { Link } from "react-router-dom";
 import { obtenerPosterPelicula } from '../Services/obtenerPosterPelicula';
-import styles from './PeliculasCard.module.css';
+import styles from '../Styles/PeliculasCard.module.css';
 
 export const PeliculaCard = ({pelicula}) => {
 
