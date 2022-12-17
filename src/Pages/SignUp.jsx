@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext";
 import styles from "../Styles/SignUp.module.css";
@@ -21,7 +21,7 @@ function SignUp() {
 
     try {
       setError("");
-      await signUp(emailRef.current.value, passwordRef.current.value);
+      await signUp(emailRef.current.value, passwordRef.current.value);      
       setLoading(false);
     } catch (error) {
       setError("Error, no se pudo registrar el nuevo usuario");

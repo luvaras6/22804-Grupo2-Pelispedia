@@ -2,14 +2,18 @@ import React, { useState } from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../Contexts/AuthContext';
+import { addFavorito } from '../Pages/AddUser';
 
 import Search from './Search'
 
 import styles from '../Styles/Navbar.module.css';
 
+
 function Navbar() {
   const { signOut, currentUser } = useAuth();
   const navigate = useNavigate();
+
+  //console.log(currentUser.toJSON());
 
   const handleLogOut = () => {
     signOut();
@@ -36,6 +40,11 @@ function Navbar() {
             <Link to="/series">
               <h3>Series</h3>
             </Link></button>
+          </li>
+          {/* Para probar addFavorito*/}
+          <li>  <button type='button' onClick={() => addFavorito(currentUser.uid,'527774')}>
+                  <h3>Favoritos</h3>
+                </button>
           </li>
           {/* <li>{ LoggedIn &&<button type='button'>
             <Link to="/favs">
