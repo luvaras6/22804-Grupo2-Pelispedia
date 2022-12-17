@@ -5,12 +5,9 @@ import peliculas from '../peliculas.json'
 
 
 function Peliculas() {
-
-
-  console.log(peliculas);
   return (
     <>
-      <PeliculasGrid peliculas={peliculas} />
+      <PeliculasGrid />
     </>
   )
 }
