@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { get } from '../Services/httpClient';
 import { PeliculaCard } from "./PeliculaCard";
-import styles from "./PeliculasGrid.module.css";
+import styles from "../Styles/PeliculasGrid.module.css";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Error404 from '../Pages/Error404';
 import { Loader } from './Loader';

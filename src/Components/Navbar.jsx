@@ -9,7 +9,6 @@ import Search from './Search'
 import styles from '../Styles/Navbar.module.css';
 
 
-
 function Navbar() {
   const { signOut, currentUser } = useAuth();
   const navigate = useNavigate();
