@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "../Styles/Login.module.css";
 
 //import { auth } from '../firebase';
-import Firebase, { db } from "../firebase";
-import { collection, getDocs, getDoc, query, doc, addDoc } from "firebase/firestore";
+// import Firebase, { db } from "../firebase";
+// import { collection, getDocs, getDoc, query, doc, addDoc } from "firebase/firestore";
 import { useAuth } from "../Contexts/AuthContext";
 
 const Login = () => {
