@@ -1,44 +1,55 @@
-import React, { useEffect, useState } from 'react';
-import { get } from '../Services/httpClient';
+import React, { useEffect, useState } from "react";
+import { get } from "../Services/httpClient";
 import { PeliculaCard } from "./PeliculaCard";
 import styles from "./PeliculasGrid.module.css";
-import InfiniteScroll from 'react-infinite-scroll-component';
-import Error404 from '../Pages/Error404';
-import { Loader } from './Loader';
+import InfiniteScroll from "react-infinite-scroll-component";
+import Error404 from "../Pages/Error404";
+import { Loader } from "./Loader";
+import { useAuth } from "../Contexts/AuthContext";
 
-export const PeliculasGrid = ({busqueda}) => {
-    const [ peliculas, setPeliculas ] = useState([]);
-    const [ cargando, setCargando ] = useState(true);
-    const [ pagina, setPagina ] = useState(1);
-    const [ hayMasPag, setHayMasPag ] = useState(true);
+export const PeliculasGrid = () => {
+  const [peliculas, setPeliculas] = useState([]);
+  const [cargando, setCargando] = useState(true);
+  const [pagina, setPagina] = useState(1);
+  const [hayMasPag, setHayMasPag] = useState(true);
 
-    useEffect(()=>{
-        setCargando(true);
-        const busquedaUrl = busqueda ? "/search/movie?query=" + busqueda + "&page=" + pagina : "/discover/movie?page=" + pagina;
-        get(busquedaUrl)
-        .then(datos => {
-            setPeliculas(pagAnterior => pagAnterior.concat(datos.results));
-            setHayMasPag(datos.page < datos.total_pages);
-            setCargando(false);
-        });
-    }, [busqueda, pagina])
+  const { search, setSearch } = useAuth();
 
-    if(!cargando && peliculas.length === 0){
-        return <Error404 />
-    }
+  useEffect(() => {
+    setCargando(true);
+    const busquedaUrl =
+      search != null || ""
+        ? "/search/movie?api_key=10ec06e437cd7ab31ae1e11c3d7f6c8b&query=" +
+          search +
+          "&page=" +
+          pagina
+        : "/discover/movie?page=" + pagina;
+    console.log("la url es: " + busquedaUrl);
+    console.log("la busqueda es: " + search);
+    get(busquedaUrl).then((datos) => {
+      setPeliculas((pagAnterior) => pagAnterior.concat(datos.results));
+      setHayMasPag(datos.page < datos.total_pages);
+      setCargando(false);
+      /* setSearch(""); */ // TODO esto debe actuar despues de renderizar la busqueda
+    });
+  }, [search, pagina]);
 
-    return (
-        <InfiniteScroll
-            dataLength={peliculas.length}
-            hasMore={hayMasPag}
-            next={()=> setPagina(pagAnterior => pagAnterior + 1)}
-            loader={<Loader />}
-        >
-            <ul className={styles.peliculasGrid}>
-                {peliculas.map(pelicula => 
-                    <PeliculaCard key={pelicula.id} pelicula={pelicula} />
-                )}
-            </ul>
-        </InfiniteScroll>
-    );
-}
+  if (!cargando && peliculas.length === 0) {
+    return <Error404 />;
+  }
+
+  return (
+    <InfiniteScroll
+      dataLength={peliculas.length}
+      hasMore={hayMasPag}
+      next={() => setPagina((pagAnterior) => pagAnterior + 1)}
+      loader={<Loader />}
+    >
+      <ul className={styles.peliculasGrid}>
+        {peliculas.map((pelicula) => (
+          <PeliculaCard key={pelicula.id} pelicula={pelicula} />
+        ))}
+      </ul>
+    </InfiniteScroll>
+  );
+};
