@@ -1,14 +1,14 @@
 export const aboutInfo = [
-  {
-    name: 'Aguirre Federico',
-    profesion: '--',
-    imagen: './Aguirre.png',
-    descripcion: '--',
-    social: {
-      linkedin: 'https://www.linkedin.com/in/federico-nicolas-aguirre',
-      github: '',
-    },
-  },
+  // {
+  //   name: 'Aguirre Federico',
+  //   profesion: '--',
+  //   imagen: './Aguirre.png',
+  //   descripcion: '--',
+  //   social: {
+  //     linkedin: 'https://www.linkedin.com/in/federico-nicolas-aguirre',
+  //     github: '',
+  //   },
+  // },
   {
     name: 'Barrionuevo Christian',
     profesion: 'Frontend Developer',
@@ -20,16 +20,16 @@ export const aboutInfo = [
       github: 'https://github.com/ChrisBarrio',
     },
   },
-  {
-    name: 'Bertoldo Barbara',
-    profesion: 'Php Dev',
-    imagen: './Bertoldo.png',
-    descripcion: 'Vivo en Nuñez, me gusta leer y jugar al voley.',
-    social: {
-      linkedin: 'https://www.linkedin.com/in/barbara-bertoldo/',
-      github: '',
-    },
-  },
+  // {
+  //   name: 'Bertoldo Barbara',
+  //   profesion: 'Php Dev',
+  //   imagen: './Bertoldo.png',
+  //   descripcion: 'Vivo en Nuñez, me gusta leer y jugar al voley.',
+  //   social: {
+  //     linkedin: 'https://www.linkedin.com/in/barbara-bertoldo/',
+  //     github: '',
+  //   },
+  // },
   {
     name: 'Carrillo Florencia',
     profesion: 'Frontend Developer / Mobile, DBA',

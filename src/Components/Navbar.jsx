@@ -36,12 +36,10 @@ function Navbar() {
             </Link></button>
           </li>
           <li><button type='button'>
-            <Link to="/series">
-              <h3>Series</h3>
+            <Link to="/favoritos">
+              <h3>Favoritos</h3>
             </Link></button>
           </li>
-          {/* Para probar addFavorito*/}
-          
           {/* <li>{ LoggedIn &&<button type='button'>
             <Link to="/favs">
               <h3>Favoritos</h3>
@@ -49,20 +47,20 @@ function Navbar() {
           </li> */}
         </ul>
       </div>
-      <div className={styles.search}> 
+      <div className={styles.search}>
         <ul>
           <li>
 
             {/* Crear el routing del componente Login a /Login no a / */}
-            
-            { !currentUser &&
-            <button type='button' onClick={handleLogin}>
+
+            {!currentUser &&
+              <button type='button' onClick={handleLogin}>
                 <h3>Log in</h3>
-            </button>}
-            { currentUser &&
-            <button type='button' onClick={handleLogOut}>
+              </button>}
+            {currentUser &&
+              <button type='button' onClick={handleLogOut}>
                 <h3>Log out</h3>
-            </button>}
+              </button>}
           </li>
           <li><Search></Search></li>
         </ul>
