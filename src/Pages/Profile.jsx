@@ -1,12 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../Styles/Profile.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
-import { FindUser } from "./Firebasebackend"; 
+import { useAuth } from "../Contexts/AuthContext";
+import { getUserName, getItemById } from "./AddUser";
+import { async } from "@firebase/util";
+
 
 const Profile = () => {
   const [showAlert, setShowAlert] = useState(false);
+  const { currentUser } = useAuth();
+  const [userData, setUserData] = useState(null);
   
+  useEffect(() =>{
+    getUserData();
+  },[])
+
+  const getUserData= async() => {
+    const p= await getItemById(currentUser.uid);
+    setUserData(p);
+ //   console.log(p.userNombre);
+ //   console.log(userData.userNombre);
+  }
+
   const handleOnClose = (e) => {
     e.preventDefault();
     setShowAlert(false);
@@ -33,15 +49,15 @@ const Profile = () => {
       <div className={styles.infoContainer}>
         <div className={styles.infoField}>
           <span>Nombre: </span>
-          <span>Matias</span>
+          <span>{userData.userNombre}</span>
         </div>
         <div className={styles.infoField}>
           <span>Apellido: </span>
-          <span>Sanchez</span>
+          <span>{userData.userApellido}</span>
         </div>
         <div className={styles.infoField}>
           <span>Correo: </span>
-          <span>matias@gmail.com</span>
+          <span>{userData.userEmail}</span>
         </div>
       </div>
       <button className={styles.button} onClick={showChangeEmailAlert}>
