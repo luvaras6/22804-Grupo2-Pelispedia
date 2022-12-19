@@ -66,7 +66,12 @@ export default function About() {
             </figure>
           );
         })}
-        <ScrollToTop smooth />
+        <ScrollToTop smooth style={{
+                backgroundColor: 'white',
+                padding: '.5rem',
+                border: 'none',
+                bottom:'10rem'
+              }} />
       </section>
     </div>
   );

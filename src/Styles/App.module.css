@@ -1,7 +1,7 @@
 .App {
   background: var(--bg);
-  /* padding: 0 2rem; */
-  display: flex;
+  display: grid;
+  align-content: space-between;
   min-height: 100vh;
   flex-direction: column;
   color: var(--white);
@@ -30,5 +30,15 @@
 
 .footer{
   text-align: center;
-  margin-bottom: 2rem;
+  z-index: 10;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, #0F2E66 0%, rgba(62, 64, 129, 0.9275) 50.52%, rgba(92, 62, 130, 0.938) 100%);
+  height: min-content;
+}
+
+.header {
+  height: min-content;
 }

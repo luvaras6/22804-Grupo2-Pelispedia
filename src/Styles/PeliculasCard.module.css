@@ -1,0 +1,40 @@
+.peliculaCard {
+    list-style: none;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.peliculaImg {
+    border-radius: 5px;
+    background-color: azure;
+}
+
+.peliculaImg:hover {
+    opacity: 0.8;
+}
+
+.peliculaTitulo {
+    padding: 0.5rem 0.7rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    color: whitesmoke;
+}
+
+.iconStar:hover{
+    cursor: pointer;
+    fill: #ffeb66;
+    filter: drop-shadow(0.5px 0.5px 1px rgb(184, 184, 184));
+}
+
+@media (max-width: 560px) {
+    .peliculaImg {
+        width: 90%;
+        height: auto;
+    }
+
+    .peliculaTitulo {
+        padding: 0.5rem 2rem 0;
+    }
+}

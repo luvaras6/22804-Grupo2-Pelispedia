@@ -6,10 +6,12 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
-import Series from "./Pages/Series";
+import LoginHelp from "./Pages/LoginHelp";
+import Favoritos from "./Pages/Favoritos";
 import Peliculas from "./Pages/Peliculas";
 import { DetallePelicula } from "./Pages/DetallePelicula";
 import About from "./Pages/About";
+import Profile from "./Pages/Profile";
 import Error404 from "./Pages/Error404";
 import { AuthProvider } from "./Contexts/AuthContext";
 
@@ -29,6 +31,7 @@ function App() {
             <Route path="/" element={<Login />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/loginHelp" element={<LoginHelp />} />
             <Route element={<ProtectedRoute />}>
               <Route path="/peliculas" element={<Peliculas />} />
               <Route
@@ -36,8 +39,9 @@ function App() {
                 path="/peliculas/:idPelicula"
                 element={<DetallePelicula />}
               ></Route>
-              <Route path="/series" element={<Series />} />
+              <Route path="/favoritos" element={<Favoritos />} />
               <Route path="/about" element={<About />} />
+              <Route path="/profile" element={<Profile />} />
             </Route>
             <Route path="*" element={<Error404 />} />
           </Routes>

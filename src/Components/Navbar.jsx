@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext";
 
-import Search from "./Search";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../Contexts/AuthContext";
+import { addFavorito, getUserName } from "../Pages/AddUser";
 
 import styles from "../Styles/Navbar.module.css";
 import { Container, Nav, Navbar, Stack } from "react-bootstrap";

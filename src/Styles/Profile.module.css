@@ -1,0 +1,100 @@
+.profileContainers {
+  width: 100%;
+  max-width: 400px;
+  background-color: rgba(0, 0, 0, 0.3);
+  margin: auto;
+  padding: 4rem;
+  display: grid;
+  row-gap: 2rem;
+}
+
+.title {
+  font-size: 2.3rem;
+  text-align: center;
+}
+
+.profileIcon {
+  width: 100%;
+  font-size: 100px;
+}
+
+.infoContainer {
+  font-size: 2rem;
+  margin: 2rem 0;
+}
+
+.button {
+  background-color: white;
+  color: rgb(65, 65, 65);
+  border: none;
+  font-size: 2rem;
+  max-width: 300px;
+}
+
+.button:hover {
+  background-color: white;
+  color: rgb(145, 145, 145);
+}
+
+.button:active {
+  background-color: white;
+}
+
+/** Alert Styles */
+.alertContainer {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: grid;
+}
+
+.alert {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 16px;
+  margin: auto;
+  padding: 3rem;
+  text-align: center;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.alert span {
+  display: block;
+}
+
+.alertInput {
+  background-color: white;
+  border-radius: 10px;
+  width: 80vw;
+  max-width: 400px;
+  border: none;
+  display: block;
+  padding: 1rem;
+  text-align: center;
+}
+
+.alertButtonsContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.alertButton {
+  background-color: white;
+  color: rgb(65, 65, 65);
+  border: none;
+  min-width: 100px;
+}
+
+.alertButton:hover {
+  background-color: white;
+  color: black;
+  box-shadow: 0 0 10px 5px rgb(184, 184, 184);
+}
