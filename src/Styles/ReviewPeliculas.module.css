@@ -1,0 +1,40 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-height: 20rem;
+    font-size: medium;
+    padding: 1rem;
+}
+.review{
+    overflow: auto;
+    font-size: medium;
+}
+.row1{
+    display: flex;
+    justify-content: space-between;
+}
+.puntuacion{
+    margin-right: 1rem;
+}
+.rating{
+    font-size: small;
+    background: #447CAD;
+    text-align: center;
+    color: #FFFFFF;
+    letter-spacing: -1px;
+    width: 2em;
+    height: 1.6em;
+    line-height: 1.6em;
+    padding: .5rem;
+    border-radius: 0.3em;
+    box-sizing: border-box;
+    border: 1px solid #447CAD;
+    font-weight: normal;
+}
+.imgAvatar{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
