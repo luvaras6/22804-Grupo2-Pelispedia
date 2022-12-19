@@ -19,8 +19,8 @@ const Profile = () => {
   const getUserData= async() => {
     const p= await getItemById(currentUser.uid);
     setUserData(p);
-    console.log(p.userNombre);
-    console.log(userData.userNombre);
+ //   console.log(p.userNombre);
+ //   console.log(userData.userNombre);
   }
 
   const handleOnClose = (e) => {
