@@ -1,5 +1,5 @@
 import Firebase, { db } from '../firebase';
-import { collection, getDocs, getDoc, query, doc, addDoc, deleteDoc, updateDoc, setDoc } from 'firebase/firestore';
+import { collection, getDocs, getDoc, query, doc, addDoc, deleteDoc, updateDoc, setDoc, where} from 'firebase/firestore';
 import { async } from '@firebase/util'
 
 
