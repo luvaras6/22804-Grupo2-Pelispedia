@@ -1,8 +1,9 @@
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext";
-import { getUserName } from "../Pages/AddUser";
+import { getUserName, getItemById } from "../Pages/AddUser";
 
-import { Search } from "./Search";
+import Search from "./Search";
 
 import styles from "../Styles/Navbar.module.css";
 import { Container, Nav, Navbar, Stack } from "react-bootstrap";
@@ -10,6 +11,8 @@ import logo from "../Styles/logo-pelispedia.png";
 
 function NavBar() {
   const { signOut, currentUser } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const [userName, setUserName] = useState();
 
   const navigate = useNavigate();
 
@@ -21,6 +24,15 @@ function NavBar() {
   const handleLogin = () => {
     navigate("/peliculas");
   };
+
+  //Esta funcion trae el user completo con el UID que trae de la base de datos
+  useEffect(() => {
+    getItemById(currentUser.uid).then((result) => {
+      setUserName(result.userNombre);
+      setLoading(false);
+      console.log(result.userNombre);
+    });
+  }, []);
 
   return (
     <>
@@ -60,11 +72,13 @@ function NavBar() {
                   </button>
                 </Navbar.Collapse>
                 <Container
-                  className={`${styles.search} ms-auto justify-content-between`}
+                  className={`${styles.search} ms-auto justify-content-end`}
                 >
-                  <Navbar.Text className="align-items-center">
-                    <h2>Bienvenido!!</h2>
-                  </Navbar.Text>
+                  {!loading && (
+                    <Nav.Link href="/profile" className="align-items-center">
+                      <h2>{userName}</h2>
+                    </Nav.Link>
+                  )}
                   <Navbar.Text>
                     <h3>
                       <Search></Search>

@@ -24,9 +24,6 @@ function Search() {
 
   return (
     <div>
-      <label htmlFor="searchBar">
-        <h4>Buscador</h4>
-      </label>
       <form className={styles.searchField} onSubmit={busquedaPeli}>
         <input
           type="search"

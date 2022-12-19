@@ -1,5 +1,4 @@
 import styles from "./Styles/App.module.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 import NavBar from "./Components/Navbar";
 import ProtectedRoute from "./Components/ProtectedRoute";
