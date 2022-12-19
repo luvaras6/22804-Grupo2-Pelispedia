@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../Contexts/AuthContext';
-import { addFavorito } from '../Pages/AddUser';
+import { addFavorito, getUserName } from '../Pages/AddUser';
 
 import Search from './Search'
 
@@ -13,8 +13,7 @@ function Navbar() {
   const { signOut, currentUser } = useAuth();
   const navigate = useNavigate();
 
-  //console.log(currentUser.toJSON());
-
+  
   const handleLogOut = () => {
     signOut();
     navigate("/login");
@@ -42,7 +41,7 @@ function Navbar() {
             </Link></button>
           </li>
           {/* Para probar addFavorito*/}
-          <li>  <button type='button' onClick={() => addFavorito(currentUser.uid,'527774')}>
+          <li>  <button type='button' onClick={() => getUserName(currentUser.uid)}>
                   <h3>Favoritos</h3>
                 </button>
           </li>
