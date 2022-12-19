@@ -41,10 +41,7 @@ function Navbar() {
             </Link></button>
           </li>
           {/* Para probar addFavorito*/}
-          <li>  <button type='button' onClick={() => getUserName(currentUser.uid)}>
-                  <h3>Favoritos</h3>
-                </button>
-          </li>
+          
           {/* <li>{ LoggedIn &&<button type='button'>
             <Link to="/favs">
               <h3>Favoritos</h3>
