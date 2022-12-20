@@ -50,29 +50,8 @@ export const PeliculaCard = ({ pelicula, favorite, onFavoriteClick }) => {
 
     }
 
-    const handleStarClick = async () => {
-        if (isFavorite) await quitarFavorito();
-        else await agregarFavorito();
-        if (onFavoriteClick) onFavoriteClick();
 
-  return (
-    <li className={styles.peliculaCard}>
-      <Link to={'/peliculas/' + pelicula.id}>
-        <img
-          width={230}
-          height={345}
-          className={styles.peliculaImg}
-          src={imgUrl}
-          alt="Poster de la Pelicula"
-        />
-      </Link>
-      <div className={styles.peliculaTitulo}>
-        {pelicula.title}
-
-        <FavoriteStar active={isFavorite} onClick={agregarFavorito} />
-      </div>
-    </li>
-  );
+ 
     return (
         <li className={styles.peliculaCard}>
             <Link to={'/peliculas/' + pelicula.id}>
