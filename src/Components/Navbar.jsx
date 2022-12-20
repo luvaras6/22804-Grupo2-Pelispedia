@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../Contexts/AuthContext";
-import { getUserName, getItemById } from "../Pages/AddUser";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Contexts/AuthContext';
+import { getUserName, getItemById } from '../Pages/AddUser';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../Contexts/AuthContext';
 import { addFavorito, getUserName } from '../Services/userService';
-import Search from "./Search";
+import Search from './Search';
 
-import styles from "../Styles/Navbar.module.css";
-import { Container, Nav, Navbar, Stack } from "react-bootstrap";
-import logo from "../Styles/logo-pelispedia.png";
+import styles from '../Styles/Navbar.module.css';
+import { Container, Nav, Navbar, Stack } from 'react-bootstrap';
+import logo from '../Styles/logo-pelispedia.png';
 
 function NavBar() {
   const { signOut, currentUser } = useAuth();
@@ -21,11 +21,11 @@ function NavBar() {
 
   const handleLogOut = () => {
     signOut();
-    navigate("/login");
+    navigate('/login');
   };
 
   const handleLogin = () => {
-    navigate("/peliculas");
+    navigate('/peliculas');
   };
 
   //Esta funcion trae el user completo con el UID que trae de la base de datos
