@@ -3,7 +3,7 @@ import styles from "../Styles/Profile.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../Contexts/AuthContext";
-import { getUserName, getItemById } from "./AddUser";
+import { getUserName, getItemById } from "../Services/userService";
 import { async } from "@firebase/util";
 
 
@@ -11,16 +11,16 @@ const Profile = () => {
   const [showAlert, setShowAlert] = useState(false);
   const { currentUser } = useAuth();
   const [userData, setUserData] = useState(null);
-  
-  useEffect(() =>{
-    getUserData();
-  },[])
 
-  const getUserData= async() => {
-    const p= await getItemById(currentUser.uid);
+  useEffect(() => {
+    getUserData();
+  }, [])
+
+  const getUserData = async () => {
+    const p = await getItemById(currentUser.uid);
     setUserData(p);
- //   console.log(p.userNombre);
- //   console.log(userData.userNombre);
+    //   console.log(p.userNombre);
+    //   console.log(userData.userNombre);
   }
 
   const handleOnClose = (e) => {
@@ -41,7 +41,7 @@ const Profile = () => {
     setShowAlert("CHANGE_PASSWORD");
   };
   // Obtengo los datos del usuario
-  
+
   return (
     <div className={styles.profileContainers}>
       <h2 className={styles.title}>Perfil</h2>

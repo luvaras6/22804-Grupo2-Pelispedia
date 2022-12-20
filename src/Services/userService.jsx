@@ -1,5 +1,5 @@
 import Firebase, { db } from '../firebase';
-import { collection, getDocs, getDoc, query, doc, addDoc, deleteDoc, updateDoc, setDoc, where} from 'firebase/firestore';
+import { collection, getDocs, getDoc, query, doc, addDoc, deleteDoc, updateDoc, setDoc, where } from 'firebase/firestore';
 import { async } from '@firebase/util'
 
 
@@ -18,8 +18,8 @@ export const getFavorito = async (userId) => {
     return favoritos.docs.map(doc => doc.data().peliId.toString());
 }
 
-export const getUserName=async(userId) =>{
-    const queryDoc = doc(db,"usuarios",userId)
+export const getUserName = async (userId) => {
+    const queryDoc = doc(db, "usuarios", userId)
     const usrDoc = await getDoc(queryDoc);
     console.log(usrDoc.data().userNombre)
     return usrDoc.data().userNombre.toString()
@@ -36,7 +36,7 @@ export const getItemById = async (id) => {
 }
 
 // CREATE
-export const createItem = async(obj) => {
+export const createItem = async (obj) => {
     const colRef = collection(db, 'usuarios');
     const data = await addDoc(colRef, obj);
     return data.id;
