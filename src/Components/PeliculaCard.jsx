@@ -6,8 +6,8 @@ import { addFavorito } from '../Pages/AddUser';
 import { useAuth } from '../Contexts/AuthContext';
 import { FavoriteStar } from './FavoriteStar';
 import { useEffect } from 'react';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 export const PeliculaCard = ({ pelicula, favorite }) => {
   const [isFavorite, setIsFavorite] = useState(favorite);
@@ -27,7 +27,7 @@ export const PeliculaCard = ({ pelicula, favorite }) => {
       showConfirmButton: false,
       timer: 1800,
       timerProgressBar: true,
-    });// fin sweet alert
+    }); // fin sweet alert
   };
 
   useEffect(() => {
@@ -47,6 +47,7 @@ export const PeliculaCard = ({ pelicula, favorite }) => {
       </Link>
       <div className={styles.peliculaTitulo}>
         {pelicula.title}
+
         <FavoriteStar active={isFavorite} onClick={agregarFavorito} />
       </div>
     </li>
