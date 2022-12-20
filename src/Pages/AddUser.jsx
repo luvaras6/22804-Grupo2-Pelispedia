@@ -1,5 +1,5 @@
 import Firebase, { db } from '../firebase';
-import { collection, getDocs, getDoc, query, doc, addDoc, deleteDoc, updateDoc, setDoc } from 'firebase/firestore';
+import { collection, getDocs, getDoc, query, doc, addDoc, deleteDoc, updateDoc, setDoc,where } from 'firebase/firestore';
 import { async } from '@firebase/util'
 
 
@@ -12,11 +12,22 @@ export const addFavorito = (userId, peliId) => {
     return addDoc(collection(db, 'favoritos'), { userId, peliId });
 }
 
+export const delFavorito = async (userId, peliId) => {
+    const queryFavoritos = query(collection(db, 'favoritos'), where("userId", "==", userId), where("peliId","==",peliId));
+    const favoritos = await getDocs(queryFavoritos);
+    favoritos.forEach((doc) => {
+        console.log(doc.id, ' => ', doc.data());
+        deleteDoc('db','favoritos',doc.uid);
+    }); 
+}
+
 export const getFavorito = async (userId) => {
     const queryFavoritos = query(collection(db, 'favoritos'), where("userId", "==", userId));
     const favoritos = await getDocs(queryFavoritos);
     return favoritos.docs.map(doc => doc.data().peliId.toString());
 }
+
+
 
 export const getUserName=async(userId) =>{
     const queryDoc = doc(db,"usuarios",userId)
