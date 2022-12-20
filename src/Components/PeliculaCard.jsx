@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { obtenerPosterPelicula } from '../Services/obtenerPosterPelicula';
 import styles from '../Styles/PeliculasCard.module.css';
-import { addFavorito } from '../Services/userService';
+import { addFavorito, removeFavorito } from '../Services/userService';
 import { useAuth } from '../Contexts/AuthContext';
 import { FavoriteStar } from './FavoriteStar';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
-export const PeliculaCard = ({ pelicula, favorite }) => {
+export const PeliculaCard = ({ pelicula, favorite, onFavoriteClick }) => {
     const [isFavorite, setIsFavorite] = useState(favorite);
     const imgUrl = obtenerPosterPelicula(pelicula.poster_path, 300);
     const { currentUser } = useAuth();
@@ -17,7 +17,6 @@ export const PeliculaCard = ({ pelicula, favorite }) => {
     const agregarFavorito = async () => {
         const resultado = await addFavorito(currentUser.uid, pelicula.id);
         setIsFavorite(true);
-
         // sweetalert
         const MySwal = withReactContent(Swal);
         MySwal.fire({
@@ -29,6 +28,27 @@ export const PeliculaCard = ({ pelicula, favorite }) => {
             timerProgressBar: true,
         });// fin sweet alert
     };
+
+    const quitarFavorito = async () => {
+        await removeFavorito(currentUser.uid, pelicula.id);
+        setIsFavorite(false);
+        const MySwal = withReactContent(Swal);
+        MySwal.fire({
+            title: <strong>Quitado a fav!</strong>,
+            icon: 'success',
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1800,
+            timerProgressBar: true,
+        });// fin sweet alert
+    }
+
+    const handleStarClick = async () => {
+        if (isFavorite) await quitarFavorito();
+        else await agregarFavorito();
+        if (onFavoriteClick) onFavoriteClick();
+
+    }
 
     useEffect(() => {
         setIsFavorite(favorite);
@@ -47,7 +67,7 @@ export const PeliculaCard = ({ pelicula, favorite }) => {
             </Link>
             <div className={styles.peliculaTitulo}>
                 {pelicula.title}
-                <FavoriteStar active={isFavorite} onClick={agregarFavorito} />
+                <FavoriteStar active={isFavorite} onClick={handleStarClick} />
             </div>
         </li>
     );

@@ -37,12 +37,15 @@ export const FavoritosGrid = ({ }) => {
                     setCargando(false);
                 }
             );
-
         });
     }
 
+    const handlePeliculaCardStarClick = () => {
+        getPeliculasFavoritas();
+    }
+
     useEffect(() => {
-        getPeliculasFavoritas(true);
+        getPeliculasFavoritas();
     }, [])
 
 
@@ -53,7 +56,7 @@ export const FavoritosGrid = ({ }) => {
                 :
                 <ul className={styles.peliculasGrid}>
                     {peliculas.map(pelicula =>
-                        <PeliculaCard key={pelicula.id} pelicula={pelicula} favorite={true} />
+                        <PeliculaCard key={pelicula.id} pelicula={pelicula} favorite={true} onFavoriteClick={handlePeliculaCardStarClick} />
                     )}
                 </ul>
             }
