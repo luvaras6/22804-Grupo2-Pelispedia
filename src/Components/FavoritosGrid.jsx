@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { get } from '../Services/httpClient';
 import { PeliculaCard } from "./PeliculaCard";
-import styles from "./PeliculasGrid.module.css";
+import styles from "../Styles/PeliculasGrid.module.css";
 import Error404 from '../Pages/Error404';
 import { Loader } from './Loader';
-import { getFavorito } from '../Pages/AddUser';
+import { getFavorito } from '../Services/userService';
 import { useAuth } from '../Contexts/AuthContext';
 
 export const FavoritosGrid = ({ }) => {
@@ -37,12 +37,15 @@ export const FavoritosGrid = ({ }) => {
                     setCargando(false);
                 }
             );
-
         });
     }
 
+    const handlePeliculaCardStarClick = () => {
+        getPeliculasFavoritas();
+    }
+
     useEffect(() => {
-        getPeliculasFavoritas(true);
+        getPeliculasFavoritas();
     }, [])
 
 
@@ -53,7 +56,7 @@ export const FavoritosGrid = ({ }) => {
                 :
                 <ul className={styles.peliculasGrid}>
                     {peliculas.map(pelicula =>
-                        <PeliculaCard key={pelicula.id} pelicula={pelicula} favorite={true} />
+                        <PeliculaCard key={pelicula.id} pelicula={pelicula} favorite={true} onFavoriteClick={handlePeliculaCardStarClick} />
                     )}
                 </ul>
             }
