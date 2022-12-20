@@ -1,15 +1,11 @@
-import React from 'react'
-import { PeliculasGrid } from '../Components/PeliculasGrid'
-import peliculas from '../peliculas.json'
-
-
+import { PeliculasGrid } from "../Components/PeliculasGrid";
 
 function Peliculas() {
   return (
     <>
-      <PeliculasGrid />
+      <PeliculasGrid peliculas />
     </>
-  )
+  );
 }
 
-export default Peliculas
+export default Peliculas;

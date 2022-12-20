@@ -61,9 +61,3 @@ export const createItem = async (obj) => {
     const data = await addDoc(colRef, obj);
     return data.id;
 }
-
-// UPDATE
-export const updateItem = async (id, obj) => {
-    const colRef = collection(db, 'usuarios');
-    await updateDoc(doc(colRef, id), obj)
-}

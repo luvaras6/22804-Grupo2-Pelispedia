@@ -1,7 +1,6 @@
 import styles from "./Styles/App.module.css";
 
-
-import Navbar from "./Components/Navbar";
+import NavBar from "./Components/Navbar";
 import ProtectedRoute from "./Components/ProtectedRoute";
 
 import Login from "./Pages/Login";
@@ -9,22 +8,21 @@ import SignUp from "./Pages/SignUp";
 import LoginHelp from "./Pages/LoginHelp";
 import Favoritos from "./Pages/Favoritos";
 import Peliculas from "./Pages/Peliculas";
-import { DetallePelicula } from './Pages/DetallePelicula';
-import About from './Pages/About';
-import Profile from './Pages/Profile'
-import Error404 from './Pages/Error404';
+import { DetallePelicula } from "./Pages/DetallePelicula";
+import About from "./Pages/About";
+import Profile from "./Pages/Profile";
+import Error404 from "./Pages/Error404";
 import { AuthProvider } from "./Contexts/AuthContext";
 
 import { Route, Routes } from "react-router-dom";
-import Footer from './Components/Footer';
-
+import Footer from "./Components/Footer";
 
 function App() {
   return (
     <AuthProvider>
       <div className={styles.App}>
         <header>
-          <Navbar />
+          <NavBar />
         </header>
         <main className={styles.main}>
           {/* Ruteo de paginas */}
@@ -35,7 +33,11 @@ function App() {
             <Route path="/loginHelp" element={<LoginHelp />} />
             <Route element={<ProtectedRoute />}>
               <Route path="/peliculas" element={<Peliculas />} />
-              <Route exact path="/peliculas/:idPelicula" element={<DetallePelicula />}></Route>
+              <Route
+                exact
+                path="/peliculas/:idPelicula"
+                element={<DetallePelicula />}
+              ></Route>
               <Route path="/favoritos" element={<Favoritos />} />
               <Route path="/about" element={<About />} />
               <Route path="/profile" element={<Profile />} />
