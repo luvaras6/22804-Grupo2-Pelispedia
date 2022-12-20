@@ -3,7 +3,7 @@ import styles from "../Styles/Profile.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../Contexts/AuthContext";
-import { getUserName, getItemById } from "./AddUser";
+import { getUserName, getItemById } from "../Services/userService";
 import { async } from "@firebase/util";
 import { Loader } from "../Components/Loader";
 
@@ -17,6 +17,8 @@ const Profile = () => {
     getUserData();
   }, []);
 
+  const getUserData = async () => {
+    const p = await getItemById(currentUser.uid);
   const getUserData = async () => {
     const p = await getItemById(currentUser.uid);
     setUserData(p);
@@ -43,6 +45,7 @@ const Profile = () => {
     setShowAlert("CHANGE_PASSWORD");
   };
   // Obtengo los datos del usuario
+
 
   return (
     <>

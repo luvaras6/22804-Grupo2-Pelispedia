@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { get } from "../Services/httpClient";
 import { PeliculaCard } from "./PeliculaCard";
 import styles from "../Styles/PeliculasGrid.module.css";
-import InfiniteScroll from "react-infinite-scroll-component";
-import Error404 from "../Pages/Error404";
-import { Loader } from "./Loader";
-import { useAuth } from "../Contexts/AuthContext";
-import { getFavorito } from "../Pages/AddUser";
+import InfiniteScroll from 'react-infinite-scroll-component';
+import Error404 from '../Pages/Error404';
+import { Loader } from './Loader';
+import { getFavorito } from '../Services/userService';
+import { useAuth } from '../Contexts/AuthContext';
 
 export const PeliculasGrid = () => {
   const [peliculas, setPeliculas] = useState([]);

@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext";
 import { getUserName, getItemById } from "../Pages/AddUser";
 
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../Contexts/AuthContext';
+import { addFavorito, getUserName } from '../Services/userService';
 import Search from "./Search";
 
 import styles from "../Styles/Navbar.module.css";

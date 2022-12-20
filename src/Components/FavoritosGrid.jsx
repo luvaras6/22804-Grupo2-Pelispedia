@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { get } from "../Services/httpClient";
 import { PeliculaCard } from "./PeliculaCard";
 import styles from "../Styles/PeliculasGrid.module.css";
-import Error404 from "../Pages/Error404";
-import { Loader } from "./Loader";
-import { getFavorito } from "../Pages/AddUser";
-import { useAuth } from "../Contexts/AuthContext";
+import Error404 from '../Pages/Error404';
+import { Loader } from './Loader';
+import { getFavorito } from '../Services/userService';
+import { useAuth } from '../Contexts/AuthContext';
 
 export const FavoritosGrid = ({}) => {
   const [peliculas, setPeliculas] = useState([]);
@@ -33,32 +33,35 @@ export const FavoritosGrid = ({}) => {
         );
       }
 
-      Promise.all(promises).then(() => {
-        setPeliculas(favs);
-        setCargando(false);
-      });
-    });
-  };
+            Promise.all(promises).then(
+                () => {
+                    setPeliculas(favs);
+                    setCargando(false);
+                }
+            );
+        });
+    }
 
-  useEffect(() => {
-    getPeliculasFavoritas(true);
-  }, []);
+    const handlePeliculaCardStarClick = () => {
+        getPeliculasFavoritas();
+    }
 
-  return (
-    <>
-      {cargando ? (
-        <Loader />
-      ) : (
-        <ul className={styles.peliculasGrid}>
-          {peliculas.map((pelicula) => (
-            <PeliculaCard
-              key={pelicula.id}
-              pelicula={pelicula}
-              favorite={true}
-            />
-          ))}
-        </ul>
-      )}
-    </>
-  );
-};
+    useEffect(() => {
+        getPeliculasFavoritas();
+    }, [])
+
+
+    return (
+        <>
+            {cargando ?
+                <Loader />
+                :
+                <ul className={styles.peliculasGrid}>
+                    {peliculas.map(pelicula =>
+                        <PeliculaCard key={pelicula.id} pelicula={pelicula} favorite={true} onFavoriteClick={handlePeliculaCardStarClick} />
+                    )}
+                </ul>
+            }
+        </>
+    );
+}
