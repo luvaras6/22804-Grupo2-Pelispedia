@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../Contexts/AuthContext';
-import { addFavorito, getUserName } from '../Pages/AddUser';
+import { addFavorito, getUserName } from '../Services/userService';
 
 import Search from './Search'
 
@@ -13,7 +13,7 @@ function Navbar() {
   const { signOut, currentUser } = useAuth();
   const navigate = useNavigate();
 
-  
+
   const handleLogOut = () => {
     signOut();
     navigate("/login");

@@ -1,15 +1,23 @@
-import Firebase, { db } from '../firebase';
-import { collection, getDocs, getDoc, query, doc, addDoc, deleteDoc, updateDoc, setDoc, where} from 'firebase/firestore';
-import { async } from '@firebase/util'
+import { db } from '../firebase';
+import { collection, getDocs, getDoc, query, doc, addDoc, deleteDoc, updateDoc, where } from 'firebase/firestore';
 
 
 export const addUser = (usrEmail, usrPassword) => {
     addDoc(collection(db, 'usuarios'), { usrEmail });
 }
 
-export const addFavorito = (userId, peliId) => {
-    //setDoc(doc(db, "favoritos", userId), {"peliId" : peliId});
+export const addFavorito = async (userId, peliId) => {
     return addDoc(collection(db, 'favoritos'), { userId, peliId });
+}
+
+export const isFavorito = async (userId, peliId) => {
+    const conditions = [
+        where("userId", "==", userId),
+        where("peliId", "==", peliId)
+    ]
+    const queryFavoritos = query(collection(db, 'favoritos'), ...conditions);
+    const favoritos = await getDocs(queryFavoritos);
+    return favoritos.empty;
 }
 
 export const getFavorito = async (userId) => {
@@ -18,8 +26,20 @@ export const getFavorito = async (userId) => {
     return favoritos.docs.map(doc => doc.data().peliId.toString());
 }
 
-export const getUserName=async(userId) =>{
-    const queryDoc = doc(db,"usuarios",userId)
+export const removeFavorito = async (userId, peliId) => {
+    const conditions = [
+        where("userId", "==", userId),
+        where("peliId", "==", peliId)
+    ]
+    const queryFavoritos = query(collection(db, 'favoritos'), ...conditions);
+    const favoritos = await getDocs(queryFavoritos);
+    favoritos.forEach(async document => {
+        await deleteDoc(doc(db, "favoritos", document.id))
+    });
+}
+
+export const getUserName = async (userId) => {
+    const queryDoc = doc(db, "usuarios", userId)
     const usrDoc = await getDoc(queryDoc);
     console.log(usrDoc.data().userNombre)
     return usrDoc.data().userNombre.toString()
@@ -36,7 +56,7 @@ export const getItemById = async (id) => {
 }
 
 // CREATE
-export const createItem = async(obj) => {
+export const createItem = async (obj) => {
     const colRef = collection(db, 'usuarios');
     const data = await addDoc(colRef, obj);
     return data.id;
