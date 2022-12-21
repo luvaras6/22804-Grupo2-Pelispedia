@@ -28,6 +28,11 @@ export const PeliculasGrid = () => {
   };
 
   useEffect(() => {
+    
+    if(search){
+      setPeliculas([]);
+    };
+
     const controller = new AbortController();
     getFavoritos();
     setCargando(true);
