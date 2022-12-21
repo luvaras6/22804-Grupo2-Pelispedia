@@ -7,12 +7,10 @@ import { Loader } from './Loader';
 import { getFavorito } from '../Services/userService';
 import { useAuth } from '../Contexts/AuthContext';
 
-
-export const FavoritosGrid = ({ }) => {
-    const [peliculas, setPeliculas] = useState([]);
-    const [cargando, setCargando] = useState(true);
-    const { currentUser } = useAuth();
-
+export const FavoritosGrid = ({}) => {
+  const [peliculas, setPeliculas] = useState([]);
+  const [cargando, setCargando] = useState(true);
+  const { currentUser } = useAuth();
 
   const getPeliculaById = (id) => {
     const controller = new AbortController();
@@ -34,7 +32,6 @@ export const FavoritosGrid = ({ }) => {
           })
         );
       }
-
 
             Promise.all(promises).then(
                 () => {

@@ -1,36 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
-*{
-	font-family:'Roboto','Segoe UI';
-	margin:0;
-	padding:0;
-	box-sizing:border-box;
-	outline:none;
-	text-decoration:none;
+* {
+  font-family: "Roboto", "Segoe UI";
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  text-decoration: none;
 }
 
 html {
   /* 62.5% hace que 1rem equivalga a 10px, facilita el calculo. */
-	font-size:62.5%; 
-	overflow-x:hidden;
+  font-size: 62.5%;
+  overflow-x: hidden;
   color: var(--white);
 }
-body{
+body {
   font-size: var(--FontSize-m);
 }
-a{
+a {
   text-decoration: none;
   color: var(--white);
 }
 
 /* agregar variables acá 👇🏽 */
-:root{
-  --primary-color:#4f62cd;
-  --secondary-color:#8D72E1;
-  --bg:linear-gradient(180deg, #0F2E66 0%, rgba(62, 64, 129, 0.9275) 50.52%, rgba(92, 62, 130, 0.84) 100%);
-  --black:#13131a;
-  --white:#E0E0E0;
-  --background-web: linear-gradient(180deg, #4f62cd 0%, rgba(62, 64, 129, 0.9275) 50.52%, #8D72E1 100%);
+:root {
+  --primary-color: #4f62cd;
+  --secondary-color: #8d72e1;
+  --bg: linear-gradient(
+    180deg,
+    #0f2e66 0%,
+    rgba(62, 64, 129, 0.9275) 50.52%,
+    rgba(92, 62, 130, 0.84) 100%
+  );
+  --black: #13131a;
+  --white: #e0e0e0;
+  --background-web: linear-gradient(
+    180deg,
+    #4f62cd 0%,
+    rgba(62, 64, 129, 0.9275) 50.52%,
+    #8d72e1 100%
+  );
 
   --FontSize-s: 1rem;
   --FontSize-m: 1.5rem;
