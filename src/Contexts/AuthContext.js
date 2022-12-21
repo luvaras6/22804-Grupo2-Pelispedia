@@ -9,6 +9,7 @@ import {
 } from "firebase/auth";
 import Firebase, { db } from "../firebase";
 import { collection, addDoc, setDoc, doc } from "firebase/firestore";
+import { Outlet } from "react-router";
 
 const AuthContext = React.createContext();
 
@@ -80,7 +81,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {!loading && <Outlet />}
     </AuthContext.Provider>
   );
 }

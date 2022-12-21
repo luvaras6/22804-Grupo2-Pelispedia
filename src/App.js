@@ -1,6 +1,6 @@
 import styles from "./Styles/App.module.css";
 
-import NavBarCanvas from "./Components/NavbarCanvas";
+import SignInRoute from "./Components/SignInRoute";
 import ProtectedRoute from "./Components/ProtectedRoute";
 
 import Login from "./Pages/Login";
@@ -13,42 +13,44 @@ import About from "./Pages/About";
 import Profile from "./Pages/Profile";
 import Error404 from "./Pages/Error404";
 import { AuthProvider } from "./Contexts/AuthContext";
-import { Route, Routes } from "react-router-dom";
-import Footer from "./Components/Footer";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    element: <AuthProvider />,
+    children: [
+      {
+        element: <SignInRoute />,
+        children: [
+          { path: "/", element: <Login /> },
+          { path: "/login", element: <Login /> },
+          { path: "/signup", element: <SignUp /> },
+          { path: "/loginHelp", element: <LoginHelp /> },
+        ],
+      },
+      {
+        element: <ProtectedRoute />,
+        children: [
+          { path: "/peliculas", element: <Peliculas /> },
+          { path: "/peliculas/:idPelicula", element: <DetallePelicula /> },
+          { path: "/favoritos", element: <Favoritos /> },
+          { path: "/about", element: <About /> },
+          { path: "/profile", element: <Profile /> },
+        ],
+      },
+      {
+        path: "*",
+        element: <Error404 />,
+      },
+    ],
+  },
+]);
 
 function App() {
   return (
-    <AuthProvider>
-      <div className={styles.App}>
-          <header>
-          <NavBarCanvas />
-          </header>
-        <main className={styles.main}>
-          {/* Ruteo de paginas */}
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/loginHelp" element={<LoginHelp />} />
-            <Route element={<ProtectedRoute />}>
-              <Route path="/peliculas" element={<Peliculas />} />
-              <Route
-                exact
-                path="/peliculas/:idPelicula"
-                element={<DetallePelicula />}
-              ></Route>
-              <Route path="/favoritos" element={<Favoritos />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/profile" element={<Profile />} />
-            </Route>
-            <Route path="*" element={<Error404 />} />
-          </Routes>
-        </main>
-        <footer className={styles.footer}>
-          <Footer />
-        </footer>
-      </div>
-    </AuthProvider>
+    <div className={styles.App}>
+      <RouterProvider router={router} />
+    </div>
   );
 }
 
