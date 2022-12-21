@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 import {
   obtenerPosterPelicula,
@@ -63,6 +64,11 @@ export function DetallePelicula() {
 
   return (
     <>
+      <Helmet>
+        <title>Pelispedia 🍿 || {pelicula.title}</title>
+        <meta name="keywords" content="tmdb pelicula" />
+        <meta name="description" content="detalle de pelicula " />
+      </Helmet>
       <div id="infoDescargar" className={styles.containerPrincipal}>
         <div
           className={styles.contenedorBg}
@@ -153,15 +159,15 @@ export function DetallePelicula() {
         </div>
       </div>
       <div className={styles.trailerBox}>
-          <Animated
-            animationIn="slideInUp"
-            animationInDuration={1000}
-            isVisible={true}
-          >
-        <div className={styles.trailer}>
+        <Animated
+          animationIn="slideInUp"
+          animationInDuration={1000}
+          isVisible={true}
+        >
+          <div className={styles.trailer}>
             <TrailerPelicula />
-        </div>
-          </Animated>
+          </div>
+        </Animated>
         <div className={styles.SocialReview}>
           <RedesSocialesPeliculas />
           <ReviewPeliculas />
