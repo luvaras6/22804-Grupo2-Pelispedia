@@ -1,6 +1,6 @@
 import styles from "./Styles/App.module.css";
 
-import NavBar from "./Components/Navbar";
+import NavBarCanvas from "./Components/NavbarCanvas";
 import ProtectedRoute from "./Components/ProtectedRoute";
 
 import Login from "./Pages/Login";
@@ -13,7 +13,6 @@ import About from "./Pages/About";
 import Profile from "./Pages/Profile";
 import Error404 from "./Pages/Error404";
 import { AuthProvider } from "./Contexts/AuthContext";
-
 import { Route, Routes } from "react-router-dom";
 import Footer from "./Components/Footer";
 
@@ -21,9 +20,9 @@ function App() {
   return (
     <AuthProvider>
       <div className={styles.App}>
-        <header>
-          <NavBar />
-        </header>
+          <header>
+          <NavBarCanvas />
+          </header>
         <main className={styles.main}>
           {/* Ruteo de paginas */}
           <Routes>

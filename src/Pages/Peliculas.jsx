@@ -1,6 +1,6 @@
 import React from 'react';
 import { PeliculasGrid } from '../Components/PeliculasGrid';
-import peliculas from '../peliculas.json';
+// import peliculas from '../peliculas.json';
 import ScrollToTop from 'react-scroll-to-top';
 import { Helmet } from 'react-helmet';
 
@@ -8,7 +8,7 @@ function Peliculas() {
   return (
     <>
       <Helmet>
-        <title>Pelispedia 🍿 || Catálogo</title>
+        <title>Pelispedia 🍿</title>
         <meta name="keywords" content="peliculas estrenos api tmdb" />
         <meta
           name="description"

@@ -3,9 +3,7 @@ import styles from "../Styles/Profile.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../Contexts/AuthContext";
-import { getUserName, getItemById } from "../Services/userService";
-import { async } from "@firebase/util";
-import { Loader } from "../Components/Loader";
+import { getItemById } from "../Services/userService";
 
 const Profile = () => {
   const [showAlert, setShowAlert] = useState(false);
@@ -13,12 +11,57 @@ const Profile = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const EmailAlert = ({ onClose, onSubmit }) => (
+    <div className={styles.alertContainer}>
+      <form className={styles.alert} onSubmit={onSubmit}>
+        <div className="inputGroup">
+          <span>Ingresa tu nuevo email:</span>
+          <input className={styles.alertInput} type="email" />
+        </div>
+  
+        <div className={styles.alertButtonsContainer}>
+          <button className={styles.alertButton} onClick={onClose}>
+            Cambiar
+          </button>
+          <button className={styles.alertButton} onClick={onClose}>
+            Volver
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+  
+  const PasswordAlert = ({ onClose, onSubmit }) => (
+    <div className={styles.alertContainer}>
+      <form className={styles.alert} onSubmit={onSubmit}>
+        <div className="inputGroup">
+          <label htmlFor="password">Ingresa tu nueva contraseña:</label>
+          <input className={styles.alertInput} type="password" id="password" />
+        </div>
+  
+        <div className="inputGroup">
+          <label htmlFor="password">Confirma tu nueva contraseña:</label>
+          <input className={styles.alertInput} type="password" />
+        </div>
+  
+        <div className={styles.alertButtonsContainer}>
+          <button className={styles.alertButton} onClick={onClose}>
+            Cambiar
+          </button>
+          <button className={styles.alertButton} onClick={onClose}>
+            Volver
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+
+
+
   useEffect(() => {
     getUserData();
-  }, []);
+  });
 
-  const getUserData = async () => {
-    const p = await getItemById(currentUser.uid);
   const getUserData = async () => {
     const p = await getItemById(currentUser.uid);
     setUserData(p);
@@ -50,7 +93,7 @@ const Profile = () => {
   return (
     <>
       {!loading &&
-        (console.log(userData),
+        // (console.log(userData),
         (
           <div className={styles.profileContainers}>
             <h2 className={styles.title}>Perfil</h2>
@@ -88,54 +131,9 @@ const Profile = () => {
               />
             ) : null}
           </div>
-        ))}
+        )}
     </>
   );
 };
-
-const EmailAlert = ({ onClose, onSubmit }) => (
-  <div className={styles.alertContainer}>
-    <form className={styles.alert} onSubmit={onSubmit}>
-      <div className="inputGroup">
-        <span>Ingresa tu nuevo email:</span>
-        <input className={styles.alertInput} type="email" />
-      </div>
-
-      <div className={styles.alertButtonsContainer}>
-        <button className={styles.alertButton} onClick={onClose}>
-          Cambiar
-        </button>
-        <button className={styles.alertButton} onClick={onClose}>
-          Volver
-        </button>
-      </div>
-    </form>
-  </div>
-);
-
-const PasswordAlert = ({ onClose, onSubmit }) => (
-  <div className={styles.alertContainer}>
-    <form className={styles.alert} onSubmit={onSubmit}>
-      <div className="inputGroup">
-        <label htmlFor="password">Ingresa tu nueva contraseña:</label>
-        <input className={styles.alertInput} type="password" id="password" />
-      </div>
-
-      <div className="inputGroup">
-        <label htmlFor="password">Confirma tu nueva contraseña:</label>
-        <input className={styles.alertInput} type="password" />
-      </div>
-
-      <div className={styles.alertButtonsContainer}>
-        <button className={styles.alertButton} onClick={onClose}>
-          Cambiar
-        </button>
-        <button className={styles.alertButton} onClick={onClose}>
-          Volver
-        </button>
-      </div>
-    </form>
-  </div>
-);
 
 export default Profile;
