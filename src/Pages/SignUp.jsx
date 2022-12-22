@@ -7,6 +7,7 @@ function SignUp() {
   const [error, setError] = React.useState();
   const [loading, setLoading] = React.useState(false);
 
+  const nombreUsuarioRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const { signUp, currentUser } = useAuth();
@@ -21,7 +22,11 @@ function SignUp() {
 
     try {
       setError("");
-      await signUp(emailRef.current.value, passwordRef.current.value);      
+      await signUp(
+        emailRef.current.value,
+        passwordRef.current.value,
+        nombreUsuarioRef.current.value
+      );
       setLoading(false);
     } catch (error) {
       setError("Error, no se pudo registrar el nuevo usuario");
@@ -61,6 +66,19 @@ function SignUp() {
           className="form-control"
           id="exampleInputPassword1"
           ref={passwordRef}
+        />
+      </div>
+      <div className={styles.input}>
+        {error && <h3>{error}</h3>}
+        <label htmlFor="nombreUsuario" className="form-label">
+          Nombre de usuario
+        </label>
+        <input
+          type="text"
+          required
+          className="form-control"
+          id="nombreUsuario"
+          ref={nombreUsuarioRef}
         />
       </div>
       <div className={styles.btnLink}>

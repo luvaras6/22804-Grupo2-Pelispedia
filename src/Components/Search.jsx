@@ -1,35 +1,48 @@
-import React from 'react';
+import React from "react";
+import { useState } from "react";
+import styles from "../Styles/Search.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { useAuth } from "../Contexts/AuthContext";
 import { useNavigate } from 'react-router-dom';
 
-import { useQuery } from '../Hooks/useQuery';
+function Search() {
+  const [busqueda, setBusqueda] = useState("");
+  const { setSearch } = useAuth();
+  const navigate = useNavigate();
 
-import styles from '../Styles/Search.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+  const busquedaPeli = (e) => {
+    e.preventDefault();
+    setSearch(busqueda);
+    // console.log("busqueda peli: " + busqueda);
+    /* setBusqueda(null); */
+    setBusqueda('')
+    navigate('/peliculas');
 
-function Search(){
-    const query = useQuery();
-    const search = query.get("search");
-    const navigation =  useNavigate();
-    function searchForm(e){
-        e.preventDefault();
-    }
-    return(
-        <div > 
-            <label htmlFor="searchBar" ><h4>Buscador</h4></label>
-        <form className={styles.searchField} onSubmit={searchForm}>
-            <input type="text" id='searchBar' className="form-control" placeholder="Buscar" 
-            value={search || ""} 
-            onChange={(e)=> {
-                     const term = e.target.value.toLowerCase();
-                     navigation("/?search=" + term);
-                    }}/>
-            <button type="submit">
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-            </button>
-        </form>
-        </div>
-    )
+  };
+
+  const changeHandler = (e) => {
+    setBusqueda(e.target.value);
+  };
+
+  return (
+    <div>
+      <form className={styles.searchField} onSubmit={busquedaPeli}>
+        <input
+          type="search"
+          id="searchBar"
+          className="form-control"
+          placeholder="Buscar películas"
+          name="busqueda"
+          value={busqueda}
+          onChange={changeHandler}
+        />
+        <button type="submit">
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+        </button>
+      </form>
+    </div>
+  );
 }
 
 export default Search;

@@ -1,13 +1,17 @@
-import React, { useEffect, useReducer, useRef } from "react";
+import React, { useReducer, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../Styles/Login.module.css";
 
 import { useAuth } from "../Contexts/AuthContext";
 
+const errorDescription = {
+  "auth/wrong-password": "Credenciales invalidas",
+};
+
 const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { currentUser, signIn } = useAuth();
+  const { signIn } = useAuth();
   const navigate = useNavigate();
 
   const [state, dispatch] = useReducer((state, action) => {
@@ -25,18 +29,17 @@ const Login = () => {
       case "LOGIN_FAILED":
         return {
           error:
-            action.payload.code === "auth/wrong-password"
-              ? "Contraseña invalida"
-              : "Error, no se pudo ingresar a la cuenta",
+            errorDescription[action.payload.code] ||
+            "Error al ingresar en la cuenta",
           isLoading: false,
         };
       default:
-        console.log("Invalid action");
+        console.log("action.type no registrado");
     }
   }, {});
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
       await signIn(emailRef.current.value, passwordRef.current.value);
@@ -46,10 +49,6 @@ const Login = () => {
       dispatch({ type: "LOGIN_FAILED", payload: error });
     }
   };
-
-  useEffect(() => {
-    if (currentUser) return navigate("/peliculas", { replace: true });
-  }, []);
 
   return (
     <form className={`${styles.form} w-xs-90 w-lg-50`} onSubmit={handleSubmit}>
@@ -97,4 +96,3 @@ const Login = () => {
 };
 
 export default Login;
-
