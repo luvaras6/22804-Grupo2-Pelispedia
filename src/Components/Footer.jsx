@@ -5,7 +5,7 @@ import styles from '../Styles/Footer.module.css'
 
 export default function Footer() {
   return (
-    <div className={styles.container}>
+    <footer className={styles.container}>
       <div>
         <Link to='/'>PELISPEDIA 🍿</Link>
       </div>
@@ -15,6 +15,6 @@ export default function Footer() {
         <b className={styles.divisor}>|</b>
         <Link to="/peliculas" className={styles.link}>Peliculas</Link>
       </div>
-    </div>
+    </footer>
   );
 }

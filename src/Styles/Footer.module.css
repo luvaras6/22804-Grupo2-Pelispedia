@@ -4,6 +4,9 @@
   justify-content: space-around;
   font-size: var(--FontSize-m);
 }
+footer a:hover{
+  color: var(--white);
+}
 .copyright{
   font-size: var(--FontSize-s);
   margin: .5rem 0;

@@ -28,7 +28,7 @@ const LoginHelp = () => {
           isLoading: false,
         };
       default:
-        console.log("Invalid action");
+        console.log("action.type no registrado");
     }
   };
 
