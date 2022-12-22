@@ -1,80 +1,68 @@
-import React, { useEffect, useState } from "react";
-import { get } from "../Services/httpClient";
-import { PeliculaCard } from "./PeliculaCard";
-import styles from "../Styles/PeliculasGrid.module.css";
+import React from 'react';
+import { get } from '../Services/httpClient';
+import { PeliculaCard } from './PeliculaCard';
+import styles from '../Styles/PeliculasGrid.module.css';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Error404 from '../Pages/Error404';
 import { Loader } from './Loader';
 import { getFavorito } from '../Services/userService';
 import { useAuth } from '../Contexts/AuthContext';
+import { useInfiniteQuery, useQuery } from 'react-query';
 
 export const PeliculasGrid = () => {
-  const [peliculas, setPeliculas] = useState([]);
-  const [cargando, setCargando] = useState(true);
-  const [pagina, setPagina] = useState(1);
-  const [hayMasPag, setHayMasPag] = useState(true);
-  const [favoritos, setFavoritos] = useState([]);
   const { currentUser } = useAuth();
   const { search, setSearch } = useAuth();
 
-  const getFavoritos = () => {
-    getFavorito(currentUser.uid).then((res) => {
-      setFavoritos([...new Set(res)]);
-    });
-  };
-
   const isFavorito = (pelicula) => {
-    return favoritos.includes(pelicula.id.toString());
+    return favoritesQuery.data.includes(pelicula.id.toString());
   };
 
-  useEffect(() => {
-    
-    if(search){
-      setPeliculas([]);
-    };
+  // Cargar lista de favoritos desde FireBase
+  const fetchFavorites = async () => {
+    return await getFavorito(currentUser.uid).then((res) => [...new Set(res)]);
+  };
+  const favoritesQuery = useQuery('favorites', fetchFavorites);
 
-    const controller = new AbortController();
-    getFavoritos();
-    setCargando(true);
-    const busquedaUrl =
-      search != null || ""
-        ? "/search/movie?api_key=10ec06e437cd7ab31ae1e11c3d7f6c8b&query=" +
-          search +
-          "&page=" +
-          pagina
-        : "/discover/movie?page=" + pagina;
-    console.log("la url es: " + busquedaUrl, controller);
-    console.log("la busqueda es: " + search);
-    get(busquedaUrl, controller)
-      .then((datos) => {
-        setPeliculas((pagAnterior) => pagAnterior.concat(datos.results));
-        setHayMasPag(datos.page < datos.total_pages);
-        setCargando(false);
-      })
-      .catch((e) => {
-        console.log(e);
-        /* setSearch(""); */ // TODO esto debe actuar despues de renderizar la busqueda
-      });
+  // Cargar lista de peliculas desde TheMovieDB
+  const fetchMovies = async ({ pageParam = 1 }) => {
+    const busquedaUrl = '/discover/movie?page=' + pageParam;
+    return await get(busquedaUrl).then((response) => response);
+  };
+  const { data, fetchNextPage, hasNextPage, status } = useInfiniteQuery(
+    'movies',
+    fetchMovies,
+    {
+      getNextPageParam: (lastPage, pages) => {
+        if (pages.length === lastPage.total_pages) return null;
+        return pages.length + 1;
+      },
+    }
+  );
 
-    return () => {
-      controller.abort();
-    };
-  }, [search, pagina]);
-
-  if (!cargando && peliculas.length === 0) {
+  if (status === 'error' || favoritesQuery.useState === 'error')
     return <Error404 />;
-  }
+
+  if (status === 'loading' || favoritesQuery.status === 'loading')
+    return <Loader />;
 
   return (
     <InfiniteScroll
-      dataLength={peliculas.length}
-      hasMore={hayMasPag}
-      next={() => setPagina((pagAnterior) => pagAnterior + 1)}
+      dataLength={data.pages.length}
+      hasMore={hasNextPage}
+      next={fetchNextPage}
       loader={<Loader />}
     >
       <ul className={styles.peliculasGrid}>
-        {peliculas.map((pelicula) => (
-          <PeliculaCard key={pelicula.id} pelicula={pelicula} />
+        {data.pages.map((page, i) => (
+          <React.Fragment key={i}>
+            {page.results.map((movie) => (
+              <PeliculaCard
+                key={movie.id}
+                favorite={() => isFavorito(movie)}
+                pelicula={movie}
+              />
+            ))}
+          </React.Fragment>
         ))}
       </ul>
     </InfiniteScroll>

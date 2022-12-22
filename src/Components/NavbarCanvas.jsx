@@ -1,48 +1,39 @@
-import React, { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Offcanvas from "react-bootstrap/Offcanvas";
-import { FiLogOut } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../Contexts/AuthContext";
-import { Link } from "react-router-dom";
-import { getItemById } from "../Services/userService";
-import Search from "./Search";
-import styles from "../Styles/Navbar.module.css";
+import React, { useState, useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import { FiLogOut } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Contexts/AuthContext';
+import { Link } from 'react-router-dom';
+import { getItemById } from '../Services/userService';
+import Search from './Search';
+import styles from '../Styles/Navbar.module.css';
+import { useQuery } from 'react-query';
 
 function OffcanvasExample() {
   const { signOut, currentUser } = useAuth();
-  const [loading, setLoading] = useState(true);
-  const [userName, setUserName] = useState();
-
   const navigate = useNavigate();
 
   const handleLogOut = () => {
     signOut();
-    navigate("/login");
+    navigate('/login');
   };
 
-  //   const handleLogin = () => {
-  //     navigate('/peliculas');
-  //   };
-
-  //Esta funcion trae el user completo con el UID que trae de la base de datos
-  useEffect(() => {
-    if (!currentUser) return navigate("/login");
-    getItemById(currentUser.uid).then((result) => {
-      setUserName(result.userNombre);
-      setLoading(false);
-      // console.log(result.userNombre);
-    });
-  }, []);
+  const fetchUserInfo = async () => {
+    return currentUser
+      ? await getItemById(currentUser.uid).then((result) => result)
+      : null;
+  };
+  const userInfoQuery = useQuery('userInfo', fetchUserInfo);
 
   return (
     <>
-      {["lg"].map((expand) => (
+      {['lg'].map((expand) => (
         <Navbar variant="dark" key={expand} expand={expand} className="mb-3">
           <Container
             fluid
@@ -61,7 +52,7 @@ function OffcanvasExample() {
                 <div className="text-white">
                   <h1>Pelispedia</h1>
                   <p className="text-white-50">
-                    {" "}
+                    {' '}
                     La enciclopedia de tus películas
                   </p>
                 </div>
@@ -98,9 +89,9 @@ function OffcanvasExample() {
                         id={`offcanvasNavbarDropdown-expand-${expand}`}
                       >
                         <NavDropdown.Item>
-                          {!loading && (
+                          {!userInfoQuery.isLoading && (
                             <Link to="/profile" className="text-black">
-                              {userName}
+                              {userInfoQuery.userNombre}
                             </Link>
                           )}
                         </NavDropdown.Item>

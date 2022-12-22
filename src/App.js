@@ -1,19 +1,23 @@
-import styles from "./Styles/App.module.css";
+import styles from './Styles/App.module.css';
 
-import SignInRoute from "./Components/SignInRoute";
-import ProtectedRoute from "./Components/ProtectedRoute";
+import SignInRoute from './Components/SignInRoute';
+import ProtectedRoute from './Components/ProtectedRoute';
 
-import Login from "./Pages/Login";
-import SignUp from "./Pages/SignUp";
-import LoginHelp from "./Pages/LoginHelp";
-import Favoritos from "./Pages/Favoritos";
-import Peliculas from "./Pages/Peliculas";
-import { DetallePelicula } from "./Pages/DetallePelicula";
-import About from "./Pages/About";
-import Profile from "./Pages/Profile";
-import Error404 from "./Pages/Error404";
-import { AuthProvider } from "./Contexts/AuthContext";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Login from './Pages/Login';
+import SignUp from './Pages/SignUp';
+import LoginHelp from './Pages/LoginHelp';
+import Favoritos from './Pages/Favoritos';
+import Peliculas from './Pages/Peliculas';
+import { DetallePelicula } from './Pages/DetallePelicula';
+import About from './Pages/About';
+import Profile from './Pages/Profile';
+import Error404 from './Pages/Error404';
+import { AuthProvider } from './Contexts/AuthContext';
+
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { QueryClientProvider, QueryClient } from 'react-query';
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -22,24 +26,24 @@ const router = createBrowserRouter([
       {
         element: <SignInRoute />,
         children: [
-          { path: "/", element: <Login /> },
-          { path: "/login", element: <Login /> },
-          { path: "/signup", element: <SignUp /> },
-          { path: "/loginHelp", element: <LoginHelp /> },
+          { path: '/', element: <Login /> },
+          { path: '/login', element: <Login /> },
+          { path: '/signup', element: <SignUp /> },
+          { path: '/loginHelp', element: <LoginHelp /> },
         ],
       },
       {
         element: <ProtectedRoute />,
         children: [
-          { path: "/peliculas", element: <Peliculas /> },
-          { path: "/peliculas/:idPelicula", element: <DetallePelicula /> },
-          { path: "/favoritos", element: <Favoritos /> },
-          { path: "/about", element: <About /> },
-          { path: "/profile", element: <Profile /> },
+          { path: '/peliculas', element: <Peliculas /> },
+          { path: '/peliculas/:idPelicula', element: <DetallePelicula /> },
+          { path: '/favoritos', element: <Favoritos /> },
+          { path: '/about', element: <About /> },
+          { path: '/profile', element: <Profile /> },
         ],
       },
       {
-        path: "*",
+        path: '*',
         element: <Error404 />,
       },
     ],
@@ -48,9 +52,11 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <div className={styles.App}>
-      <RouterProvider router={router} />
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className={styles.App}>
+        <RouterProvider router={router} />
+      </div>
+    </QueryClientProvider>
   );
 }
 
