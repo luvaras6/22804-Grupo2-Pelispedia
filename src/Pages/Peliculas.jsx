@@ -2,7 +2,7 @@ import React from 'react';
 import { PeliculasGrid } from '../Components/PeliculasGrid';
 // import peliculas from '../peliculas.json';
 import ScrollToTop from 'react-scroll-to-top';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 function Peliculas() {
   return (
@@ -10,10 +10,7 @@ function Peliculas() {
       <Helmet>
         <title>Pelispedia 🍿</title>
         <meta name="keywords" content="peliculas estrenos api tmdb" />
-        <meta
-          name="description"
-          content="catalogo de peliculas "
-        />
+        <meta name="description" content="catalogo de peliculas " />
       </Helmet>
       <PeliculasGrid />
       <ScrollToTop

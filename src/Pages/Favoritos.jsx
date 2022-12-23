@@ -1,29 +1,21 @@
-import React from 'react'
+import React from 'react';
 // import { useState } from 'react';
 // import { useAuth } from '../Contexts/AuthContext';
 import { FavoritosGrid } from '../Components/FavoritosGrid';
-import { Helmet } from 'react-helmet';
-
+import { Helmet } from 'react-helmet-async';
 
 function Favoritos() {
-
-    // const [favoritos, setFavoritos] = useState([]);
-
-
-    return (
-        <>
-        <Helmet>
+  return (
+    <>
+      <Helmet>
         <title>Pelispedia 🍿 || Favoritos</title>
         <meta name="keywords" content="peliculas estrenos api tmdb" />
-        <meta
-          name="description"
-          content="pagina de peliculas favoritas "
-        />
+        <meta name="description" content="pagina de peliculas favoritas " />
       </Helmet>
-            
-            <FavoritosGrid></FavoritosGrid>
-        </>
-    )
+
+      <FavoritosGrid></FavoritosGrid>
+    </>
+  );
 }
 
 export default Favoritos;

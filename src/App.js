@@ -15,6 +15,7 @@ import Error404 from './Pages/Error404';
 import { AuthProvider } from './Contexts/AuthContext';
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
 // Desactivar registro de errores en React Query
@@ -59,11 +60,13 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <div className={styles.App}>
-        <RouterProvider router={router} />
-      </div>
-    </QueryClientProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <div className={styles.App}>
+          <RouterProvider router={router} />
+        </div>
+      </QueryClientProvider>
+    </HelmetProvider>
   );
 }
 

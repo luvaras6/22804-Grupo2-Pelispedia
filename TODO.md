@@ -4,8 +4,7 @@
 
 ### Todo
 
-- [ ] Remplazar paquete obsoleto "react-helmet"
-- [ ] Arreglar fetching de datos en profile
+- [ ] Implementacion de React Query en pagina Profile
 - [ ] Mejorar mensajes de errores en SignUp y Login
 - [ ] Agregar valores por defectos en el fetching de datos de usuarios en userService
 - [ ] Modificar modulo css del navbar para que solo use clases
@@ -23,3 +22,4 @@
 - [x] Arreglar fetching de datos en navbar
 - [x] Arreglar elementos Anchor(\<a\>) anidados en navbar
 - [x] Actualizar a React Query v4
+- [x] Remplazar paquete obsoleto "react-helmet"
