@@ -51,8 +51,9 @@ export const removeFavorito = async (userId, peliId) => {
 
 // getUserById: devuelve de la colección usarios los datos del userId pasado como parámetro
 export const getUserById = async (userId) => {
-    const colRef = collection(db, 'usuarios');
-    const result = await getDoc(doc(colRef, userId));
-    return result.data();
-}
-
+  const colRef = collection(db, 'usuarios');
+  const response = await getDoc(doc(colRef, userId));
+  const userInfo = response.data();
+  if (!userInfo.userNombre) userInfo.userNombre = 'Anonimo';
+  return userInfo;
+};
