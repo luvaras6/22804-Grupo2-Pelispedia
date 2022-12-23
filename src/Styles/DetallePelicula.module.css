@@ -206,7 +206,6 @@
 @media (max-width: 768px) {
  .containerPrincipal{
     min-height:120rem ;
-    /* width: 100%; */
   }
   .contenedorBg {
     width: 100vw;
