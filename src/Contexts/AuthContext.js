@@ -7,8 +7,8 @@ import {
   updateEmail as authUpdateEmail,
   updatePassword as authUpdatePassword,
 } from "firebase/auth";
-import Firebase, { db } from "../firebase";
-import { collection, addDoc, setDoc, doc } from "firebase/firestore";
+import { db } from "../firebase";
+import { setDoc, doc } from "firebase/firestore";
 import { Outlet } from "react-router";
 
 const AuthContext = React.createContext();
@@ -22,9 +22,12 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [search, setSearch] = useState();
 
+
+  // signUp : crea un doc en la authentication de la bd
   const signUp = async (email, password, userName) => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
+      // creo un doc en la colección usuario con el mismo user.uid para luego referenciar
       const user = res.user;
       await setDoc(doc(db, "usuarios", user.uid), {
         userId: user.uid,
