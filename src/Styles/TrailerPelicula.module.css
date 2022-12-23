@@ -10,16 +10,44 @@
 }
 .container iframe {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-@media (max-width: 768px) {
+  aspect-ratio: 16/9;
+  width: 100%;
 }
 
+
+/* ipad 11 */
+@media (max-width: 835px) {
+  .container {
+    width: 100%;
+  }
+  .container iframe {
+    width: 100%;
+    aspect-ratio: 16/9;
+  }
+}
+
+
+/* ipad mini */
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+  .container iframe {
+    width: 100%;
+    aspect-ratio: 16/9;
+  }
+}
+
+/* mobile */
 @media (max-width: 600px) {
-    .container h2 {
-        display: none;
-    }
-    .container iframe{
-        width: 370px;
-        height: 350px;
-    }
+  .container {
+    width: 100%;
+  }
+  .container h2 {
+    display: none;
+  }
+  .container iframe {
+    width: 100%;
+    aspect-ratio: 16/9;
+  }
 }

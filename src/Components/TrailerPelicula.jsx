@@ -40,7 +40,7 @@ export default function TrailerPelicula() {
     trailer.results.length > 0 &&
     <div className={styles.container}>
         <h2>Mirá el trailer: {trailer.results[0].name}</h2>
-        <iframe width="560" height="315" src={`https://www.youtube.com/embed/${trailer.results[0].key}`} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title={trailer.results[0].name}></iframe>
+        <iframe  src={`https://www.youtube.com/embed/${trailer.results[0].key}`} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title={trailer.results[0].name}></iframe>
     </div>
   )
 }
