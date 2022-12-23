@@ -20,7 +20,6 @@ export function useAuth() {
 export function AuthProvider() {
   const [isLoading, setIsLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState();
-  const [search, setSearch] = useState();
 
   auth.onAuthStateChanged((user) => {
     setIsLoading(false);
@@ -66,8 +65,6 @@ export function AuthProvider() {
     resetPassword,
     updateEmail,
     updatePassword,
-    search,
-    setSearch,
   };
 
   return (

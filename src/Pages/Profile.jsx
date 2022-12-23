@@ -105,7 +105,7 @@ const Profile = () => {
             </div>
             <div className={styles.infoField}>
               <span>Correo: </span>
-              <span>{userData.userEmail}</span>
+              <span>{currentUser.email}</span>
             </div>
           </div>
           <button className={styles.button} onClick={showChangeEmailAlert}>

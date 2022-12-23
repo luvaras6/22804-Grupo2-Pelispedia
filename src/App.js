@@ -44,6 +44,8 @@ const router = createBrowserRouter([
         element: <ProtectedRoute />,
         children: [
           { path: '/peliculas', element: <Peliculas /> },
+          { path: '/peliculas/search/', element: <Peliculas /> },
+          { path: '/peliculas/search/:search', element: <Peliculas /> },
           { path: '/peliculas/:idPelicula', element: <DetallePelicula /> },
           { path: '/favoritos', element: <Favoritos /> },
           { path: '/about', element: <About /> },

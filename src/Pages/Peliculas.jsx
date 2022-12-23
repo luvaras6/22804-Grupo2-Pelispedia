@@ -3,8 +3,11 @@ import { PeliculasGrid } from '../Components/PeliculasGrid';
 // import peliculas from '../peliculas.json';
 import ScrollToTop from 'react-scroll-to-top';
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 
 function Peliculas() {
+  const { search } = useParams();
+
   return (
     <>
       <Helmet>
@@ -12,7 +15,7 @@ function Peliculas() {
         <meta name="keywords" content="peliculas estrenos api tmdb" />
         <meta name="description" content="catalogo de peliculas " />
       </Helmet>
-      <PeliculasGrid />
+      <PeliculasGrid search={search} />
       <ScrollToTop
         title="subir"
         smooth
