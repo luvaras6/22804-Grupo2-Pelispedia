@@ -15,8 +15,8 @@ export const PeliculaCard = ({ pelicula, favorite, onFavoriteClick }) => {
   const { currentUser } = useAuth();
 
   const agregarFavorito = async () => {
-    const resultado = await addFavorito(currentUser.uid, pelicula.id);
-    setIsFavorite(true);
+    const resultado = await addFavorito(currentUser.uid, pelicula.id); //Agrega el ID pelicula a favoritos del user
+    setIsFavorite(true); //setea la prop favorito en true
     // sweetalert
     const MySwal = withReactContent(Swal);
     MySwal.fire({
@@ -46,7 +46,7 @@ export const PeliculaCard = ({ pelicula, favorite, onFavoriteClick }) => {
   const handleStarClick = async () => {
     if (isFavorite) await quitarFavorito();
     else await agregarFavorito();
-    if (onFavoriteClick) onFavoriteClick();
+    if (onFavoriteClick) onFavoriteClick(); //si la prop onFavoriteClick tiene asignada una función en el componente Padre, la ejecuta, sino no
   };
 
   return (
