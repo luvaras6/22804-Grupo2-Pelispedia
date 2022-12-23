@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import styles from '../Styles/Login.module.css';
 
 import { useAuth } from '../Contexts/AuthContext';
@@ -12,7 +12,8 @@ const Login = () => {
   const { signIn } = useAuth();
   const [error, setError] = useState();
 
-  const mutation = useMutation(signIn, {
+  const mutation = useMutation({
+    mutationFn: signIn,
     onSuccess: () => {
       <Navigate to={'/peliculas'} />;
     },

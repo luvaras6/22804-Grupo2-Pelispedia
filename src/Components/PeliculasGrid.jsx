@@ -7,11 +7,13 @@ import Error404 from '../Pages/Error404';
 import { Loader } from './Loader';
 import { getFavorito } from '../Services/userService';
 import { useAuth } from '../Contexts/AuthContext';
-import { useInfiniteQuery, useQuery } from 'react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 export const PeliculasGrid = () => {
   const { currentUser } = useAuth();
-  const { search, setSearch } = useAuth();
+
+  // TODO implementar buscador
+  // const { search, setSearch } = useAuth();
 
   const isFavorito = (pelicula) => {
     return favoritesQuery.data.includes(pelicula.id.toString());
@@ -21,23 +23,24 @@ export const PeliculasGrid = () => {
   const fetchFavorites = async () => {
     return await getFavorito(currentUser.uid).then((res) => [...new Set(res)]);
   };
-  const favoritesQuery = useQuery('favorites', fetchFavorites);
+  const favoritesQuery = useQuery({
+    queryKey: ['favorites'],
+    queryFn: fetchFavorites,
+  });
 
   // Cargar lista de peliculas desde TheMovieDB
   const fetchMovies = async ({ pageParam = 1 }) => {
     const busquedaUrl = '/discover/movie?page=' + pageParam;
     return await get(busquedaUrl).then((response) => response);
   };
-  const { data, fetchNextPage, hasNextPage, status } = useInfiniteQuery(
-    'movies',
-    fetchMovies,
-    {
-      getNextPageParam: (lastPage, pages) => {
-        if (pages.length === lastPage.total_pages) return null;
-        return pages.length + 1;
-      },
-    }
-  );
+  const { data, fetchNextPage, hasNextPage, status } = useInfiniteQuery({
+    queryKey: ['movies'],
+    queryFn: fetchMovies,
+    getNextPageParam: (lastPage, pages) => {
+      if (pages.length === lastPage.total_pages) return null;
+      return pages.length + 1;
+    },
+  });
 
   if (status === 'error' || favoritesQuery.useState === 'error')
     return <Error404 />;

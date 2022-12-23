@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 import { getItemById } from '../Services/userService';
 import Search from './Search';
 import styles from '../Styles/Navbar.module.css';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 function OffcanvasExample() {
   const { signOut, currentUser } = useAuth();
@@ -29,7 +29,10 @@ function OffcanvasExample() {
       ? await getItemById(currentUser.uid).then((result) => result)
       : null;
   };
-  const userInfoQuery = useQuery('userInfo', fetchUserInfo);
+  const userInfoQuery = useQuery({
+    queryKey: ['userInfo'],
+    queryFn: fetchUserInfo,
+  });
 
   return (
     <>
@@ -88,12 +91,12 @@ function OffcanvasExample() {
                         title="Perfil"
                         id={`offcanvasNavbarDropdown-expand-${expand}`}
                       >
-                        <NavDropdown.Item>
-                          {!userInfoQuery.isLoading && (
-                            <Link to="/profile" className="text-black">
-                              {userInfoQuery.userNombre}
-                            </Link>
-                          )}
+                        <NavDropdown.Item
+                          href="/profile"
+                          className="text-black"
+                        >
+                          {!userInfoQuery.isLoading &&
+                            userInfoQuery.data.userNombre}
                         </NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item onClick={handleLogOut}>
