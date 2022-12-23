@@ -10,7 +10,7 @@ import { FiLogOut } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext";
 import { Link } from "react-router-dom";
-import { getItemById } from "../Services/userService";
+import { getUserById } from "../Services/userService";
 import Search from "./Search";
 import styles from "../Styles/Navbar.module.css";
 
@@ -33,7 +33,7 @@ function OffcanvasExample() {
   //Esta funcion trae el user completo con el UID que trae de la base de datos
   useEffect(() => {
     if (!currentUser) return navigate("/login");
-    getItemById(currentUser.uid).then((result) => {
+    getUserById(currentUser.uid).then((result) => {
       setUserName(result.userNombre);
       setLoading(false);
       // console.log(result.userNombre);
