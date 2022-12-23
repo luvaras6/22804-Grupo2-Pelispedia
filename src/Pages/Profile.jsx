@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import styles from '../Styles/Profile.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
-import { useAuth } from '../Contexts/AuthContext';
-import { getItemById } from '../Services/userService';
+import React, { useState, useEffect } from "react";
+import styles from "../Styles/Profile.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
+import { useAuth } from "../Contexts/AuthContext";
+import { getUserById } from "../Services/userService";
 
 const Profile = () => {
   const [showAlert, setShowAlert] = useState(false);
@@ -61,7 +61,7 @@ const Profile = () => {
   });
 
   const getUserData = async () => {
-    const p = await getItemById(currentUser.uid);
+    const p = await getUserById(currentUser.uid);
     setUserData(p);
     setLoading(false);
     //   console.log(p.userNombre);

@@ -1,9 +1,8 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 import styles from '../Styles/Error404.module.css';
-import { Helmet } from 'react-helmet-async';
 
 export default function Error404() {
   return (
