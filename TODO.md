@@ -4,11 +4,11 @@
 
 ### Todo
 
+- [ ] Implementacion de React Query en pagina DetallePelicula
 - [ ] Implementacion de React Query en pagina Profile
 - [ ] Mejorar mensajes de errores en SignUp y Login
 - [ ] Agregar valores por defectos en el fetching de datos de usuarios en userService
 - [ ] Modificar modulo css del navbar para que solo use clases
-- [ ] Arreglar barra de busquedas en el navbar
 - [ ] Implementacion de React Query en componente FavoritosGrid
 - [ ] Implementacion de React Query en pagina profile
 
@@ -23,3 +23,4 @@
 - [x] Arreglar elementos Anchor(\<a\>) anidados en navbar
 - [x] Actualizar a React Query v4
 - [x] Remplazar paquete obsoleto "react-helmet"
+- [x] Arreglar barra de busqueda en el navbar

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { get } from '../Services/httpClient';
 import { PeliculaCard } from './PeliculaCard';
 import styles from '../Styles/PeliculasGrid.module.css';
@@ -9,11 +9,10 @@ import { getFavorito } from '../Services/userService';
 import { useAuth } from '../Contexts/AuthContext';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
-export const PeliculasGrid = () => {
+export const PeliculasGrid = ({ search }) => {
   const { currentUser } = useAuth();
 
   // TODO implementar buscador
-  // const { search, setSearch } = useAuth();
 
   const isFavorito = (pelicula) => {
     return favoritesQuery.data.includes(pelicula.id.toString());
@@ -30,17 +29,28 @@ export const PeliculasGrid = () => {
 
   // Cargar lista de peliculas desde TheMovieDB
   const fetchMovies = async ({ pageParam = 1 }) => {
-    const busquedaUrl = '/discover/movie?page=' + pageParam;
+    const busquedaUrl = search
+      ? '/search/movie?api_key=10ec06e437cd7ab31ae1e11c3d7f6c8b&query=' +
+        search +
+        '&page=' +
+        pageParam
+      : '/discover/movie?page=' + pageParam;
     return await get(busquedaUrl).then((response) => response);
   };
-  const { data, fetchNextPage, hasNextPage, status } = useInfiniteQuery({
-    queryKey: ['movies'],
-    queryFn: fetchMovies,
-    getNextPageParam: (lastPage, pages) => {
-      if (pages.length === lastPage.total_pages) return null;
-      return pages.length + 1;
-    },
-  });
+  const { data, fetchNextPage, hasNextPage, status, refetch } =
+    useInfiniteQuery({
+      queryKey: ['movies'],
+      queryFn: fetchMovies,
+      getNextPageParam: (lastPage, pages) => {
+        if (pages.length === lastPage.total_pages) return null;
+        return pages.length + 1;
+      },
+    });
+
+  // Volver a cargar peliculas
+  useEffect(() => {
+    refetch();
+  }, [search, refetch]);
 
   if (status === 'error' || favoritesQuery.useState === 'error')
     return <Error404 />;
@@ -54,6 +64,7 @@ export const PeliculasGrid = () => {
       hasMore={hasNextPage}
       next={fetchNextPage}
       loader={<Loader />}
+      // scrollThreshold="1"
     >
       <ul className={styles.peliculasGrid}>
         {data.pages.map((page, i) => (
