@@ -1,41 +1,39 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../Contexts/AuthContext";
-import styles from "../Styles/SignUp.module.css";
+import React, { useRef, useState } from 'react';
+import { useMutation } from 'react-query';
+import { Link, Navigate } from 'react-router-dom';
+import { useAuth } from '../Contexts/AuthContext';
+import authErrors from '../data/authErrors';
+import styles from '../Styles/SignUp.module.css';
 
 function SignUp() {
-  const [error, setError] = React.useState();
-  const [loading, setLoading] = React.useState(false);
-
   const nombreUsuarioRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { signUp, currentUser } = useAuth();
+  const passwordConfirmRef = useRef();
+  const [error, setError] = useState('');
 
-  // TODO: Redirigir al login
-  const navigate = useNavigate();
+  const { signUp } = useAuth();
 
-  // TODO: Agregar validaciones
-  const handleSubmit = async (event) => {
-    setLoading(true);
-    event.preventDefault();
+  const mutation = useMutation(signUp, {
+    onSuccess: () => {
+      <Navigate to={'/peliculas'} />;
+    },
+    onError: (error) => {
+      setError(authErrors[error.code] || error.code);
+    },
+  });
 
-    try {
-      setError("");
-      await signUp(
-        emailRef.current.value,
-        passwordRef.current.value,
-        nombreUsuarioRef.current.value
-      );
-      setLoading(false);
-    } catch (error) {
-      setError("Error, no se pudo registrar el nuevo usuario");
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (passwordRef.current.value !== passwordConfirmRef.current.value)
+      return setError('Las contraseñas no coinciden');
+
+    mutation.mutate({
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+      userName: nombreUsuarioRef.current.value,
+    });
   };
-
-  useEffect(() => {
-    if (currentUser) return navigate("/peliculas", { replace: true });
-  }, []);
 
   return (
     <form className={`${styles.form} w-xs-90 w-lg-50`} onSubmit={handleSubmit}>
@@ -44,19 +42,20 @@ function SignUp() {
       </div>
       <div className={styles.input}>
         {error && <h3>{error}</h3>}
-        <label htmlFor="exampleInputEmail1" className="form-label">
+        <label htmlFor="email" className="form-label">
           Email
         </label>
         <input
           type="email"
           required
           className="form-control"
-          id="exampleInputEmail1"
+          id="email"
           ref={emailRef}
         />
       </div>
       <div className={styles.inputPassword}>
-        <label htmlFor="exampleInputPassword1" className="form-label">
+        {}
+        <label htmlFor="password" className="form-label">
           Contraseña
         </label>
         <input
@@ -64,12 +63,24 @@ function SignUp() {
           required
           minLength="4"
           className="form-control"
-          id="exampleInputPassword1"
+          id="password"
           ref={passwordRef}
         />
       </div>
+      <div className={styles.inputPassword}>
+        <label htmlFor="passwordConfirm" className="form-label">
+          Confirmar contraseña
+        </label>
+        <input
+          type="password"
+          required
+          minLength="4"
+          className="form-control"
+          id="passwordConfirm"
+          ref={passwordConfirmRef}
+        />
+      </div>
       <div className={styles.input}>
-        {error && <h3>{error}</h3>}
         <label htmlFor="nombreUsuario" className="form-label">
           Nombre de usuario
         </label>
@@ -83,9 +94,13 @@ function SignUp() {
       </div>
       <div className={styles.btnLink}>
         <Link className={styles.signup} to="/">
-          {"Ya posee una cuenta? Ingresar"}
+          {'Ya posee una cuenta? Ingresar'}
         </Link>
-        <button type="submit" className={styles.btn} disabled={loading}>
+        <button
+          type="submit"
+          className={styles.btn}
+          disabled={mutation.isLoading}
+        >
           Crear
         </button>
       </div>

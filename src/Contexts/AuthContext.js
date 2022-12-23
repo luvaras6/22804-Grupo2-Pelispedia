@@ -27,20 +27,15 @@ export function AuthProvider() {
     setCurrentUser(user);
   });
 
-  const signUp = async (email, password, userName) => {
-    try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      const user = res.user;
-      await setDoc(doc(db, 'usuarios', user.uid), {
-        userId: user.uid,
-        userEmail: email,
-        userNombre: userName,
-        userApellido: '',
-      });
-    } catch (err) {
-      console.error(err);
-      alert(err.message);
-    }
+  const signUp = async ({ email, password, userName }) => {
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    const user = res.user;
+    await setDoc(doc(db, 'usuarios', user.uid), {
+      userId: user.uid,
+      userEmail: email,
+      userNombre: userName,
+      userApellido: '',
+    });
   };
 
   const signIn = async ({ email, password }) => {

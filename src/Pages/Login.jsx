@@ -1,22 +1,23 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import styles from '../Styles/Login.module.css';
 
 import { useAuth } from '../Contexts/AuthContext';
-
-const errorDescription = {
-  'auth/wrong-password': 'Credenciales invalidas',
-};
+import authErrors from '../data/authErrors';
 
 const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const { signIn } = useAuth();
+  const [error, setError] = useState();
 
   const mutation = useMutation(signIn, {
     onSuccess: () => {
       <Navigate to={'/peliculas'} />;
+    },
+    onError: (error) => {
+      return setError(authErrors[error.code] || error.code);
     },
   });
 
@@ -33,7 +34,7 @@ const Login = () => {
       <div className={styles.login}>
         <h2>Inicia Sesión</h2>
       </div>
-      {mutation.isError && <p>{mutation.error}</p>}
+      {error && <p>{error}</p>}
       <div className={styles.input}>
         <label htmlFor="email" className="form-label">
           Email

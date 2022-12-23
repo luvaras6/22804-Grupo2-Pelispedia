@@ -15,9 +15,15 @@ import Error404 from './Pages/Error404';
 import { AuthProvider } from './Contexts/AuthContext';
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { QueryClientProvider, QueryClient } from 'react-query';
+import { QueryClientProvider, QueryClient, setLogger } from 'react-query';
 
+// Desactivar registro de errores en React Query
 const queryClient = new QueryClient();
+setLogger({
+  log: null,
+  warn: null,
+  error: null,
+});
 
 const router = createBrowserRouter([
   {
