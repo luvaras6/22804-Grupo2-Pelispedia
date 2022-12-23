@@ -2,20 +2,20 @@ import React from 'react';
 import { PeliculasGrid } from '../Components/PeliculasGrid';
 // import peliculas from '../peliculas.json';
 import ScrollToTop from 'react-scroll-to-top';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 
 function Peliculas() {
+  const { search } = useParams();
+
   return (
     <>
       <Helmet>
         <title>Pelispedia 🍿</title>
         <meta name="keywords" content="peliculas estrenos api tmdb" />
-        <meta
-          name="description"
-          content="catalogo de peliculas "
-        />
+        <meta name="description" content="catalogo de peliculas " />
       </Helmet>
-      <PeliculasGrid />
+      <PeliculasGrid search={search} />
       <ScrollToTop
         title="subir"
         smooth

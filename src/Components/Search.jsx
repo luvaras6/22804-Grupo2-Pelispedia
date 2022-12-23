@@ -1,24 +1,18 @@
-import React from "react";
-import { useState } from "react";
-import styles from "../Styles/Search.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { useAuth } from "../Contexts/AuthContext";
+import React from 'react';
+import { useState } from 'react';
+import styles from '../Styles/Search.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
 
 function Search() {
-  const [busqueda, setBusqueda] = useState("");
-  const { setSearch } = useAuth();
+  const [busqueda, setBusqueda] = useState('');
   const navigate = useNavigate();
 
   const busquedaPeli = (e) => {
     e.preventDefault();
-    setSearch(busqueda);
-    // console.log("busqueda peli: " + busqueda);
-    /* setBusqueda(null); */
-    setBusqueda('')
-    navigate('/peliculas');
-
+    navigate(`/peliculas/search/${busqueda}`, { replace: true });
   };
 
   const changeHandler = (e) => {

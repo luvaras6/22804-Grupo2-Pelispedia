@@ -1,11 +1,10 @@
 import React from 'react';
-import {Helmet} from "react-helmet";
-import { FaLinkedin, FaGithub } from 'react-icons/fa';
-
 import ScrollToTop from 'react-scroll-to-top';
 
 import styles from '../Styles/About.module.css';
 
+import { FaLinkedin, FaGithub } from 'react-icons/fa';
+import { Helmet } from 'react-helmet-async';
 import { aboutInfo } from '../data/about';
 
 export default function About() {
@@ -14,10 +13,7 @@ export default function About() {
       <Helmet>
         <title>Pelispedia 🍿 || Nosotros</title>
         <meta name="keywords" content="tmdb pelicula nosotros" />
-        <meta
-          name="description"
-          content="pagina acerca de quienes somos "
-        />
+        <meta name="description" content="pagina acerca de quienes somos " />
       </Helmet>
       <div className={styles.container}>
         <h2>Nuestro equipo</h2>

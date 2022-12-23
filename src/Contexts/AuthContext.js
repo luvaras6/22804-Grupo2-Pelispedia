@@ -1,15 +1,15 @@
-import React, { useContext, useState, useEffect } from "react";
-import { auth } from "../firebase";
+import React, { useContext, useState } from 'react';
+import { auth } from '../firebase';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   updateEmail as authUpdateEmail,
   updatePassword as authUpdatePassword,
-} from "firebase/auth";
-import { db } from "../firebase";
-import { setDoc, doc } from "firebase/firestore";
-import { Outlet } from "react-router";
+} from 'firebase/auth';
+import { db } from '../firebase';
+import { setDoc, doc } from 'firebase/firestore';
+import { Outlet } from 'react-router';
 
 const AuthContext = React.createContext();
 
@@ -17,31 +17,27 @@ export function useAuth() {
   return useContext(AuthContext);
 }
 
-export function AuthProvider({ children }) {
-  const [loading, setLoading] = useState(true);
+export function AuthProvider() {
+  const [isLoading, setIsLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState();
-  const [search, setSearch] = useState();
 
+  auth.onAuthStateChanged((user) => {
+    setIsLoading(false);
+    setCurrentUser(user);
+  });
 
-  // signUp : crea un doc en la authentication de la bd
-  const signUp = async (email, password, userName) => {
-    try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      // creo un doc en la colección usuario con el mismo user.uid para luego referenciar
-      const user = res.user;
-      await setDoc(doc(db, "usuarios", user.uid), {
-        userId: user.uid,
-        userEmail: email,
-        userNombre: userName,
-        userApellido: "",
-      });
-    } catch (err) {
-      console.error(err);
-      alert(err.message);
-    }
+  const signUp = async ({ email, password, userName }) => {
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    const user = res.user;
+    await setDoc(doc(db, 'usuarios', user.uid), {
+      userId: user.uid,
+      userEmail: email,
+      userNombre: userName,
+      userApellido: '',
+    });
   };
 
-  const signIn = async (email, password) => {
+  const signIn = async ({ email, password }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -61,15 +57,6 @@ export function AuthProvider({ children }) {
     return authUpdatePassword(currentUser, password);
   };
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setLoading(false);
-      setCurrentUser(user);
-    });
-
-    return unsubscribe;
-  }, []);
-
   const value = {
     currentUser,
     signIn,
@@ -78,13 +65,11 @@ export function AuthProvider({ children }) {
     resetPassword,
     updateEmail,
     updatePassword,
-    search,
-    setSearch,
   };
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && <Outlet />}
+      {!isLoading && <Outlet />}
     </AuthContext.Provider>
   );
 }

@@ -1,53 +1,33 @@
-import React, { useReducer, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import styles from "../Styles/Login.module.css";
+import React, { useRef, useState } from 'react';
+import { Link, Navigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
+import styles from '../Styles/Login.module.css';
 
-import { useAuth } from "../Contexts/AuthContext";
-
-const errorDescription = {
-  "auth/wrong-password": "Credenciales invalidas",
-};
+import { useAuth } from '../Contexts/AuthContext';
+import authErrors from '../data/authErrors';
 
 const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const { signIn } = useAuth();
-  const navigate = useNavigate();
+  const [error, setError] = useState();
 
-  const [state, dispatch] = useReducer((state, action) => {
-    switch (action.type) {
-      case "LOGIN_START":
-        return {
-          error: null,
-          isLoading: true,
-        };
-      case "LOGIN_SUCCESS":
-        return {
-          error: null,
-          isLoading: false,
-        };
-      case "LOGIN_FAILED":
-        return {
-          error:
-            errorDescription[action.payload.code] ||
-            "Error al ingresar en la cuenta",
-          isLoading: false,
-        };
-      default:
-        console.log("action.type no registrado");
-    }
-  }, {});
+  const mutation = useMutation({
+    mutationFn: signIn,
+    onSuccess: () => {
+      <Navigate to={'/peliculas'} />;
+    },
+    onError: (error) => {
+      return setError(authErrors[error.code] || error.code);
+    },
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch({ type: "LOGIN_START" });
-    try {
-      await signIn(emailRef.current.value, passwordRef.current.value);
-      dispatch({ type: "LOGIN_SUCCESS" });
-      navigate("/peliculas");
-    } catch (error) {
-      dispatch({ type: "LOGIN_FAILED", payload: error });
-    }
+    mutation.mutate({
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+    });
   };
 
   return (
@@ -55,7 +35,7 @@ const Login = () => {
       <div className={styles.login}>
         <h2>Inicia Sesión</h2>
       </div>
-      {state.error && <p>{state.error}</p>}
+      {error && <p>{error}</p>}
       <div className={styles.input}>
         <label htmlFor="email" className="form-label">
           Email
@@ -82,12 +62,16 @@ const Login = () => {
       </div>
       <div className={styles.btnLink}>
         <Link className={styles.signup} to="/SignUp">
-          {"Aún no posee una cuenta? Crear"}
+          {'Aún no posee una cuenta? Crear'}
         </Link>
         <Link className={styles.signup} to="/loginhelp">
-          {"¿Olvidaste tu contraseña?"}
+          {'¿Olvidaste tu contraseña?'}
         </Link>
-        <button type="submit" className={styles.btn} disabled={state.isLoading}>
+        <button
+          type="submit"
+          className={styles.btn}
+          disabled={mutation.isLoading}
+        >
           Ingresar
         </button>
       </div>
