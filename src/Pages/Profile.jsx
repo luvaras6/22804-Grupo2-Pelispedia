@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import styles from "../Styles/Profile.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
-import { useAuth } from "../Contexts/AuthContext";
-import { getUserById } from "../Services/userService";
+import React, { useState, useEffect } from 'react';
+import styles from '../Styles/Profile.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { useAuth } from '../Contexts/AuthContext';
+import { getUserById } from '../Services/userService';
 
 const Profile = () => {
   const [showAlert, setShowAlert] = useState(false);
@@ -98,10 +98,6 @@ const Profile = () => {
             <div className={styles.infoField}>
               <span>Nombre: </span>
               <span>{userData.userNombre}</span>
-            </div>
-            <div className={styles.infoField}>
-              <span>Apellido: </span>
-              <span>{userData.userApellido}</span>
             </div>
             <div className={styles.infoField}>
               <span>Correo: </span>

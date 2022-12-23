@@ -10,7 +10,7 @@ import { FiLogOut } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Contexts/AuthContext';
 import { Link } from 'react-router-dom';
-import { getItemById } from '../Services/userService';
+import { getUserById } from '../Services/userService';
 import Search from './Search';
 import styles from '../Styles/Navbar.module.css';
 import { useQuery } from '@tanstack/react-query';
@@ -26,7 +26,7 @@ function OffcanvasExample() {
 
   const fetchUserInfo = async () => {
     return currentUser
-      ? await getItemById(currentUser.uid).then((result) => result)
+      ? await getUserById(currentUser.uid).then((result) => result)
       : null;
   };
   const userInfoQuery = useQuery({
