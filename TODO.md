@@ -6,11 +6,10 @@
 
 - [ ] Implementacion de React Query en pagina DetallePelicula
 - [ ] Implementacion de React Query en pagina Profile
+- [ ] Implementacion de React Query en componente FavoritosGrid
 - [ ] Mejorar mensajes de errores en SignUp y Login
 - [ ] Agregar valores por defectos en el fetching de datos de usuarios en userService
 - [ ] Modificar modulo css del navbar para que solo use clases
-- [ ] Implementacion de React Query en componente FavoritosGrid
-- [ ] Implementacion de React Query en pagina profile
 
 ### Terminadas
 
