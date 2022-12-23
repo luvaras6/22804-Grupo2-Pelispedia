@@ -5,10 +5,14 @@ import {
   obtenerPosterPelicula,
   obtenerBackdropPelicula,
 } from '../Services/obtenerPosterPelicula';
-import html2canvas from 'html2canvas';
-import styles from '../Styles/DetallePelicula.module.css';
-import { Animated } from 'react-animated-css';
 import { get } from '../Services/httpClient';
+
+import html2canvas from 'html2canvas';
+
+import styles from '../Styles/DetallePelicula.module.css';
+
+import { Animated } from 'react-animated-css';
+
 import { Loader } from '../Components/Loader';
 import TrailerPelicula from '../Components/TrailerPelicula';
 import RedesSocialesPeliculas from '../Components/RedesSocialesPeliculas';
@@ -56,7 +60,7 @@ export function DetallePelicula() {
       link.crossOrigin = 'true';
       link.click();
     });
-  };
+  }; //fin html2canvas
 
   // rutas imagenes
   const imgUrl = obtenerPosterPelicula(pelicula.poster_path, 500);
@@ -159,6 +163,7 @@ export function DetallePelicula() {
         </div>
       </div>
       <div className={styles.trailerBox}>
+        {/* animacion react-animated-css */}
         <Animated
           animationIn="slideInUp"
           animationInDuration={1000}

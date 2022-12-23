@@ -1,11 +1,11 @@
 import React from 'react';
+import {Helmet} from "react-helmet";
+import { FaLinkedin, FaGithub } from 'react-icons/fa';
 
 import ScrollToTop from 'react-scroll-to-top';
 
 import styles from '../Styles/About.module.css';
 
-import { FaLinkedin, FaGithub } from 'react-icons/fa';
-import {Helmet} from "react-helmet";
 import { aboutInfo } from '../data/about';
 
 export default function About() {
@@ -29,8 +29,9 @@ export default function About() {
         <section className={styles.container_cards}>
           {aboutInfo.map((e) => {
             return (
+              // Card
               <figure className={styles.figure} key={e.name}>
-                {/* si no hay imagen se muestra imagen-default*/}
+                {/* si no hay imagen carga imagen-default*/}
                 {e.imagen ? (
                   <img
                     className={styles.img}
@@ -72,9 +73,10 @@ export default function About() {
                     ''
                   )}
                 </div>
-              </figure>
+              </figure>//fin card
             );
           })}
+          {/* botton de to top */}
           <ScrollToTop
             smooth
             style={{
