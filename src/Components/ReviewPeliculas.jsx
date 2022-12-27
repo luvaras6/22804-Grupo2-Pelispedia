@@ -9,6 +9,7 @@ export default function TrailerPelicula() {
   const [cargando, setCargando] = useState(true);
   const [review, setReview] = useState(null);
 
+  //Renderiza cada vez que se actualiza el id de pelicula para mostrar su información(poster, puntuación y reseña)
   useEffect(() => {
     const controller = new AbortController();
     setCargando(true);

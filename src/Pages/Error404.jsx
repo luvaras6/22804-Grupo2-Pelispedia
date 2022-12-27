@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 
 import styles from '../Styles/Error404.module.css';
 
+//Renderiza una página 404 diseñada para el usuario con información de lo ocurrido en caso de error y redirección a pagina principal
 export default function Error404() {
   return (
     <>

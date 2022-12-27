@@ -12,6 +12,7 @@ const Login = () => {
   const { signIn } = useAuth();
   const [error, setError] = useState();
 
+  //Hook que nos ayuda a manejar los estados de la petición(success, error or pending)
   const mutation = useMutation({
     mutationFn: signIn,
     onSuccess: () => {
@@ -22,6 +23,7 @@ const Login = () => {
     },
   });
 
+  //Captura los datos ingresados en el form y los settea a las const de email y password
   const handleSubmit = async (e) => {
     e.preventDefault();
     mutation.mutate({

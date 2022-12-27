@@ -6,7 +6,9 @@ import Footer from './Footer';
 import styles from '../Styles/App.module.css';
 
 const SignInRoute = ({ redirectPath = '/peliculas' }) => {
+  //Obtiene datos del usuario
   const { currentUser } = useAuth();
+  //Comprueba que exista ese usuario y de ser asi redirecciona a peliculas
   if (currentUser) return <Navigate to={redirectPath} replace={true} />;
 
   return (

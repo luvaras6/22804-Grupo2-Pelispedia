@@ -11,6 +11,7 @@ export default function TrailerPelicula() {
     const [cargando, setCargando] = useState(true);
     const [redes, setRedes] = useState(null);
   
+    //Renderiza cada vez que se actualiza el id de pelicula para obtener las redes sociales de la misma
     useEffect(() => {
       const controller = new AbortController();
       setCargando(true);
