@@ -1,5 +1,6 @@
 const API = 'https://api.themoviedb.org/3';
 
+// conexión con la API themoviedb.org, pasando el bearer token para autorización
 export function get(path) {
   return fetch(API + path, {
     headers: {

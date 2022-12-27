@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import styles from '../Styles/Error404.module.css';
 
 //Renderiza una página 404 diseñada para el usuario con información de lo ocurrido en caso de error y redirección a pagina principal
+// Function Error404 : devuelve la página correspondiente al error 404, page not found
 export default function Error404() {
   return (
     <>
