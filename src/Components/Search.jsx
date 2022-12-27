@@ -4,17 +4,18 @@ import styles from '../Styles/Search.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import { useQueryClient } from '@tanstack/react-query';
 
 function Search() {
   const [busqueda, setBusqueda] = useState('');
   const navigate = useNavigate();
 
+  //Buscador de pelicula por texto ingresado en input de form. 
   const busquedaPeli = (e) => {
     e.preventDefault();
     navigate(`/peliculas/search/${busqueda}`, { replace: true });
   };
 
+  //Obtiene value ingresado en input y lo settea en el estado de busqueda
   const changeHandler = (e) => {
     setBusqueda(e.target.value);
   };

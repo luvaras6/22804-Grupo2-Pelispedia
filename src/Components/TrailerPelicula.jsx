@@ -10,7 +10,9 @@ export default function TrailerPelicula() {
     const [cargando, setCargando] = useState(true);
     const [trailer, setTrailer] = useState(null);
   
+    //Renderiza cada vez que se actualiza el id de pelicula para mostrar trailer
     useEffect(() => {
+      //Permite abortar una o más solicitudes DOM cuando lo desee
       const controller = new AbortController();
       setCargando(true);
       get('/movie/' + idPelicula+ '/videos', controller)

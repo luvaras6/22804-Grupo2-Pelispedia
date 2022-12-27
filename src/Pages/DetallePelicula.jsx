@@ -24,6 +24,7 @@ export function DetallePelicula() {
   const [cargando, setCargando] = useState(true);
   const [pelicula, setPelicula] = useState(null);
 
+  //Renderiza los datos de la petición cada vez que se actualiza el estado de idPelicula
   useEffect(() => {
     const controller = new AbortController();
     setCargando(true);
@@ -49,6 +50,8 @@ export function DetallePelicula() {
     return null;
   }
   
+  // html2canvas
+  //Función que le permite al usuario descargar la información de la pelicula
   const descargarInfo = () => {
     html2canvas(document.getElementById('infoDescargar'), {
       backgroundColor: '#333333',

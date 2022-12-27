@@ -1,6 +1,5 @@
 import React from 'react';
 import { PeliculasGrid } from '../Components/PeliculasGrid';
-// import peliculas from '../peliculas.json';
 import ScrollToTop from 'react-scroll-to-top';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
