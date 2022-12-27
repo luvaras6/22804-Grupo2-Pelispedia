@@ -18,6 +18,7 @@ import TrailerPelicula from '../Components/TrailerPelicula';
 import RedesSocialesPeliculas from '../Components/RedesSocialesPeliculas';
 import ReviewPeliculas from '../Components/ReviewPeliculas';
 
+
 export function DetallePelicula() {
   const { idPelicula } = useParams();
   const [cargando, setCargando] = useState(true);
@@ -47,7 +48,7 @@ export function DetallePelicula() {
   if (!pelicula) {
     return null;
   }
-  // html2canvas
+  
   const descargarInfo = () => {
     html2canvas(document.getElementById('infoDescargar'), {
       backgroundColor: '#333333',
