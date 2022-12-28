@@ -50,6 +50,13 @@ export const FavoritosGrid = ({ }) => {
     getPeliculasFavoritas();
   }, [])
 
+  if (!peliculas.length) {
+    return (
+      <div  className={styles.noFav}>
+        <h3>No hay películas en favoritos</h3>
+      </div>
+    )
+  }
 
   return (
     <>

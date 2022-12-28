@@ -61,8 +61,8 @@ export const PeliculaCard = ({ pelicula, favorite, onFavoriteClick }) => {
         />
       </Link>
       <div className={styles.peliculaTitulo}>
-        {pelicula.title}
-        <FavoriteStar active={isFavorite} onClick={handleStarClick} />
+        <span>{pelicula.title}</span>
+        <span><FavoriteStar active={isFavorite} onClick={handleStarClick} /></span>
       </div>
     </li>
   );

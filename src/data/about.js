@@ -1,14 +1,4 @@
 export const aboutInfo = [
-  // {
-  //   name: 'Aguirre Federico',
-  //   profesion: '--',
-  //   imagen: './Aguirre.png',
-  //   descripcion: '--',
-  //   social: {
-  //     linkedin: 'https://www.linkedin.com/in/federico-nicolas-aguirre',
-  //     github: '',
-  //   },
-  // },
   {
     name: 'Barrionuevo Christian',
     profesion: 'Frontend Developer',
@@ -20,16 +10,6 @@ export const aboutInfo = [
       github: 'https://github.com/ChrisBarrio',
     },
   },
-  // {
-  //   name: 'Bertoldo Barbara',
-  //   profesion: 'Php Dev',
-  //   imagen: './Bertoldo.png',
-  //   descripcion: 'Vivo en Nuñez, me gusta leer y jugar al voley.',
-  //   social: {
-  //     linkedin: 'https://www.linkedin.com/in/barbara-bertoldo/',
-  //     github: '',
-  //   },
-  // },
   {
     name: 'Carrillo Florencia',
     profesion: 'Frontend Developer / Mobile, DBA',
@@ -63,25 +43,14 @@ export const aboutInfo = [
     },
   },
   {
-    name: 'Saiz Marcelo',
-    profesion: 'Desarrollador Full Stack',
-    imagen: './Saiz.png',
-    descripcion:
-      'Soy de Córdoba. Practico airsoft, equinoterapia y motociclismo.',
-    social: {
-      linkedin: 'https://www.linkedin.com/in/marcelo-s-aiz-7955bab4/',
-      github: '',
-    },
-  },
-  {
     name: 'Matias Damian Sanchez Romero',
     profesion: 'Estudiante de Ingeniería Informatica',
     imagen: './Sanchez.png',
     descripcion:
       'Vivo en Catamarca. Me apasiona todo lo relacionado a la tecnología. Mi hobbie en informática es el desarrollo de videojuegos móviles y el uso de ingeniería inversa. Mis pasatiempos: correr y entrenar.',
     social: {
-      linkedin: '',
-      github: '',
+      linkedin: 'https://www.linkedin.com/in/matias-damian-sanchez-romero-798a12214/',
+      github: 'https://github.com/matiasdsanchezr',
     },
   },
   {

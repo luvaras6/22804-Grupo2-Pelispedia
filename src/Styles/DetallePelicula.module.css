@@ -100,10 +100,21 @@
 
 .btnDescargarInfo {
   font-size: 1.5rem;
-  border: 1px solid;
-  margin-top: 8rem;
-  
+  margin-top: 5rem;
+  background-color: var(--white);
+  color: var(--primary-color);
+  border: none;
+  border-radius: 10px;
+  padding: 5px 7px;
+  min-width: 15%;
+  font-weight: bolder;
 }
+
+.btnDescargarInfo:hover{
+  background: white;
+  box-shadow: 1px 1px 3px rgb(49, 48, 48);
+}
+
 .trailer{
   display: flex;
   justify-content: center;

@@ -70,42 +70,43 @@ function OffcanvasExample() {
                   id={`offcanvasNavbar-expand-${expand}`}
                   aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
                   placement="end"
-                  className=" text-white bg-dark"
+                  className={`text-white bg-opacity-75 bg-black`}
                 >
-                  <Offcanvas.Header closeButton>
+                  <Offcanvas.Header closeButton className={`${styles.menu}`}>
                     <Offcanvas.Title
                       id={`offcanvasNavbarLabel-expand-${expand}`}
+                      className="fs-4"
                     >
                       Pelispedia : La enciclopedia de tus películas
                     </Offcanvas.Title>
                   </Offcanvas.Header>
                   <Offcanvas.Body>
-                    <Nav className="justify-content-end flex-grow-1 pe-3 ">
-                      <Link to="/peliculas" className="text-white">
-                        Peliculas
+                    <Nav className={`${styles.accesos} justify-content-end flex-grow-1 me-5 `}>
+                      <Search />
+                      <Link to="/peliculas" className={`${styles.link}`}>
+                        Películas
                       </Link>
-                      <Link to="/favoritos" className="text-white">
+                      <Link to="/favoritos" className={`${styles.link}`}>
                         Favoritos
                       </Link>
                       <NavDropdown
                         title="Perfil"
+                        className={styles.perfil}
                         id={`offcanvasNavbarDropdown-expand-${expand}`}
                       >
                         <NavDropdown.Item
                           href="/profile"
-                          className="text-black"
+                          className={`${styles.nombre} pl-1 text-light fw-semibold text-capitalize fs-5`}
                         >
                           {!userInfoQuery.isLoading &&
                             userInfoQuery.data.userNombre}
                         </NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item onClick={handleLogOut}>
+                        <NavDropdown.Item onClick={handleLogOut} className={`${styles.logOut} pl-1 text-light`}>
                           Log out <FiLogOut />
                         </NavDropdown.Item>
                       </NavDropdown>
                     </Nav>
-
-                    <Search />
                   </Offcanvas.Body>
                 </Navbar.Offcanvas>
               </>

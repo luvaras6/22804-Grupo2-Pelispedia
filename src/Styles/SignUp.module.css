@@ -6,35 +6,41 @@
     max-width: 400px;
     margin: auto;
 }
-.signup{
+
+.signUp{
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 2rem;
     width: 100%;
 }
-.signup h2{
+
+.signUp h2{
     font-size: 2.3rem;
 }
+
 .input{
-    margin-bottom: 2rem;
-}
-.inputPassword{
     margin-bottom: 1rem;
 }
+
 .btnLink{
     display: flex;
     flex-direction: column;
     width: 100%;
+    gap: 2rem;
 }
+
 .signup{
     color: var(--white);
     text-decoration: none;
     margin-bottom: 2rem;
 }
+
 .signup:hover{
     color: white;
+    text-shadow: 0.5px 0.5px 1px rgb(109, 109, 109);
 }
+
 .btn{
     margin: 0 auto;
     background: var(--white);
@@ -46,6 +52,7 @@
     font-size: 1.5rem;
     font-weight: bolder;
 }
+
 .btn:hover{
     background: white;
     box-shadow: 1px 1px 3px rgb(49, 48, 48);

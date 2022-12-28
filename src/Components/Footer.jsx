@@ -13,7 +13,7 @@ export default function Footer() {
       <div>
         <Link to="/about" className={styles.link}>Nosotros</Link>
         <b className={styles.divisor}>|</b>
-        <Link to="/peliculas" className={styles.link}>Peliculas</Link>
+        <Link to="/peliculas" className={styles.link}>Películas</Link>
       </div>
     </footer>
   );
