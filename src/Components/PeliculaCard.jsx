@@ -5,7 +5,6 @@ import styles from '../Styles/PeliculasCard.module.css';
 import { addFavorito, removeFavorito } from '../Services/userService';
 import { useAuth } from '../Contexts/AuthContext';
 import { FavoriteStar } from './FavoriteStar';
-import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
@@ -15,7 +14,7 @@ export const PeliculaCard = ({ pelicula, favorite, onFavoriteClick }) => {
   const { currentUser } = useAuth();
 
   const agregarFavorito = async () => {
-    const resultado = await addFavorito(currentUser.uid, pelicula.id); //Agrega el ID pelicula a favoritos del user
+    await addFavorito(currentUser.uid, pelicula.id); //Agrega el ID pelicula a favoritos del user
     setIsFavorite(true); //setea la prop favorito en true
     // sweetalert
     const MySwal = withReactContent(Swal);
@@ -29,6 +28,7 @@ export const PeliculaCard = ({ pelicula, favorite, onFavoriteClick }) => {
     }); // fin sweet alert
   };
 
+  //Obtiene pelicula por su id y asi eliminarla de favoritos
   const quitarFavorito = async () => {
     await removeFavorito(currentUser.uid, pelicula.id);
     setIsFavorite(false);
@@ -43,6 +43,7 @@ export const PeliculaCard = ({ pelicula, favorite, onFavoriteClick }) => {
     }); // fin sweet alert
   };
 
+  //Comprueba si se ha realizado click para quitar o agregar pelicula a favorito
   const handleStarClick = async () => {
     if (isFavorite) await quitarFavorito();
     else await agregarFavorito();

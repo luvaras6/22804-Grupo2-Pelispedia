@@ -1,14 +1,10 @@
-import Firebase,{ db } from '../firebase';
-import {collection, getDocs, getDoc, query, doc, addDoc, deleteDoc, updateDoc,setDoc} from 'firebase/firestore';
+import { db } from '../firebase';
+import { getDoc, doc} from 'firebase/firestore';
 
-
+//Obtine la información del usuario loggueado
 function GetUser(uId) { 
-    console.log(uId);
     const docRef = doc(db, "usuarios", uId);
-    const docSnap = getDoc(docRef);
-    
-    console.log("Document data:", docSnap.data());
-      
+    const docSnap = getDoc(docRef);  
 }
 
 export {GetUser};

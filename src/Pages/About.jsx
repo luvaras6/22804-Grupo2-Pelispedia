@@ -7,6 +7,7 @@ import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import { Helmet } from 'react-helmet-async';
 import { aboutInfo } from '../data/about';
 
+// function About: página acerca del proyecto, comisión, integrantes, etc.
 export default function About() {
   return (
     <>

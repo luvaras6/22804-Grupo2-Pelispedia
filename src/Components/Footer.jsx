@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import styles from '../Styles/Footer.module.css'
 
+//Contiene redireccionamientos a secciones de about y peliculas
 export default function Footer() {
   return (
     <footer className={styles.container}>

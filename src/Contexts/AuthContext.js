@@ -13,6 +13,8 @@ import { Outlet } from 'react-router';
 
 const AuthContext = React.createContext();
 
+// Funciones para manejar el user context, variables de ambiente del usuario y datos en Firebase Authentication
+
 export function useAuth() {
   return useContext(AuthContext);
 }
@@ -26,6 +28,8 @@ export function AuthProvider() {
     setCurrentUser(user);
   });
 
+
+  // SignUp: Firebase -> 1. crea un doc en Authentication (obteniendo userId) y 2. crea un doc en la colección usuarios con el mismo userId
   const signUp = async ({ email, password, userName }) => {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;

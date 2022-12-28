@@ -27,7 +27,7 @@ export const PeliculasGrid = ({ search }) => {
     queryFn: fetchFavorites,
   });
 
-  // Cargar lista de peliculas desde TheMovieDB
+  // Cargar lista de peliculas desde TheMovieDB y renderizar búsqueda 
   const fetchMovies = async ({ pageParam = 1 }) => {
     const busquedaUrl = search
       ? '/search/movie?api_key=10ec06e437cd7ab31ae1e11c3d7f6c8b&query=' +
@@ -52,9 +52,11 @@ export const PeliculasGrid = ({ search }) => {
     refetch();
   }, [search, refetch]);
 
+  //Comprueba si existe error para redireccionar al user a página Not Found
   if (status === 'error' || favoritesQuery.useState === 'error')
     return <Error404 />;
 
+  //Muestra Loader en caso de que el status de la petición sea loading
   if (status === 'loading' || favoritesQuery.status === 'loading')
     return <Loader />;
 

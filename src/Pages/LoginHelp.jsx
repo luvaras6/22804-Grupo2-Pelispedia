@@ -7,6 +7,7 @@ const LoginHelp = () => {
   const emailRef = useRef();
   const { resetPassword } = useAuth();
 
+  //De acuerdo a la acción que se este realizando en la petición de resetear password se modificará o no(si hay error) el estado del resetPassword
   const reducer = (state, action) => {
     switch (action.type) {
       case "RESET_PASSWORD_START":
@@ -34,6 +35,7 @@ const LoginHelp = () => {
 
   const [state, dispatch] = useReducer(reducer, {});
 
+  //Funcion que permite generar las acciones para resetear el estado del password(start, success or error)
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch({
