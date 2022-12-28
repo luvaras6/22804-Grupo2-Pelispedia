@@ -26,13 +26,13 @@ function Search() {
         <input
           type="search"
           id="searchBar"
-          className="form-control"
+          className={styles.formControl}
           placeholder="Buscar películas"
           name="busqueda"
           value={busqueda}
           onChange={changeHandler}
         />
-        <button type="submit">
+        <button type="submit" className={`${styles.icono}`}>
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
       </form>

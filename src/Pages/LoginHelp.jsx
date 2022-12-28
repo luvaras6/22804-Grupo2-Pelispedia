@@ -71,10 +71,10 @@ const LoginHelp = () => {
         />
       </div>
       <button type="submit" className={styles.btn} disabled={state.isLoading}>
-        Buscar
+        Cambiar
       </button>
       <Link className={styles.loginLink} to="/login">
-        {"Volver atras"}
+        {"Volver"}
       </Link>
     </form>
   );

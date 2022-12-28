@@ -4,8 +4,13 @@
   background-color: rgba(0, 0, 0, 0.3);
   margin: auto;
   padding: 4rem;
-  display: grid;
-  row-gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  font-size: 1.5rem;
 }
 
 .title {
@@ -19,25 +24,26 @@
 }
 
 .infoContainer {
-  font-size: 2rem;
   margin: 2rem 0;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .button {
-  background-color: white;
-  color: rgb(65, 65, 65);
+  background: var(--white);
+  color: var(--primary-color);
   border: none;
-  font-size: 2rem;
-  max-width: 300px;
+  border-radius: 5px;
+  padding: 5px;
+  width: 50%;
+  font-weight: bolder;
 }
 
 .button:hover {
-  background-color: white;
-  color: rgb(145, 145, 145);
-}
-
-.button:active {
-  background-color: white;
+  background: white;
+  box-shadow: 1px 1px 3px rgb(49, 48, 48);
 }
 
 /** Alert Styles */
@@ -53,7 +59,7 @@
 }
 
 .alert {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: #00163f;
   color: white;
   font-size: 16px;
   margin: auto;
@@ -78,6 +84,7 @@
   display: block;
   padding: 1rem;
   text-align: center;
+  margin: 1rem 0;
 }
 
 .alertButtonsContainer {
@@ -87,14 +94,16 @@
 }
 
 .alertButton {
+  padding: 0.5rem;
   background-color: white;
-  color: rgb(65, 65, 65);
+  color: rgb(59, 59, 59);
   border: none;
+  border-radius: 10px;
   min-width: 100px;
 }
 
 .alertButton:hover {
   background-color: white;
-  color: black;
-  box-shadow: 0 0 10px 5px rgb(184, 184, 184);
+  color: rgb(13, 13, 13);
+  box-shadow: 1px 1px 3px rgb(184, 184, 184);
 }

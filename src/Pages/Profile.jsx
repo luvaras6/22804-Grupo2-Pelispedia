@@ -14,7 +14,7 @@ const Profile = () => {
   const EmailAlert = ({ onClose, onSubmit }) => (
     <div className={styles.alertContainer}>
       <form className={styles.alert} onSubmit={onSubmit}>
-        <div className="inputGroup">
+        <div className={styles.inputGroup}>
           <span>Ingresa tu nuevo email:</span>
           <input className={styles.alertInput} type="email" />
         </div>
@@ -34,7 +34,7 @@ const Profile = () => {
   const PasswordAlert = ({ onClose, onSubmit }) => (
     <div className={styles.alertContainer}>
       <form className={styles.alert} onSubmit={onSubmit}>
-        <div className="inputGroup">
+        <div className={styles.inputGroup}>
           <label htmlFor="password">Ingresa tu nueva contraseña:</label>
           <input className={styles.alertInput} type="password" id="password" />
         </div>
@@ -96,11 +96,11 @@ const Profile = () => {
           <FontAwesomeIcon icon={faCircleUser} className={styles.profileIcon} />
           <div className={styles.infoContainer}>
             <div className={styles.infoField}>
-              <span>Nombre: </span>
+              <span className={styles.bold}>Nombre: </span>
               <span>{userData.userNombre}</span>
             </div>
             <div className={styles.infoField}>
-              <span>Correo: </span>
+              <span className={styles.bold}>Correo: </span>
               <span>{currentUser.email}</span>
             </div>
           </div>

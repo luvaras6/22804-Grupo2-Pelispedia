@@ -26,6 +26,7 @@
 
 .loginLink:hover {
   color: white;
+  text-shadow: 0.5px 0.5px 1px rgb(109, 109, 109);
 }
 
 .btn {

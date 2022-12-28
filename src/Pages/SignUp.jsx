@@ -38,8 +38,20 @@ function SignUp() {
 
   return (
     <form className={`${styles.form} w-xs-90 w-lg-50`} onSubmit={handleSubmit}>
-      <div className={styles.signup}>
+      <div className={styles.signUp}>
         <h2>Registrate</h2>
+      </div>
+      <div className={styles.input}>
+        <label htmlFor="nombreUsuario" className="form-label">
+          Nombre de usuario
+        </label>
+        <input
+          type="text"
+          required
+          className="form-control"
+          id="nombreUsuario"
+          ref={nombreUsuarioRef}
+        />
       </div>
       <div className={styles.input}>
         {error && <h3>{error}</h3>}
@@ -54,7 +66,7 @@ function SignUp() {
           ref={emailRef}
         />
       </div>
-      <div className={styles.inputPassword}>
+      <div className={styles.input}>
         {}
         <label htmlFor="password" className="form-label">
           Contraseña
@@ -68,7 +80,7 @@ function SignUp() {
           ref={passwordRef}
         />
       </div>
-      <div className={styles.inputPassword}>
+      <div className={styles.input}>
         <label htmlFor="passwordConfirm" className="form-label">
           Confirmar contraseña
         </label>
@@ -81,22 +93,14 @@ function SignUp() {
           ref={passwordConfirmRef}
         />
       </div>
-      <div className={styles.input}>
-        <label htmlFor="nombreUsuario" className="form-label">
-          Nombre de usuario
-        </label>
-        <input
-          type="text"
-          required
-          className="form-control"
-          id="nombreUsuario"
-          ref={nombreUsuarioRef}
-        />
-      </div>
+      
       <div className={styles.btnLink}>
-        <Link className={styles.signup} to="/">
-          {'Ya posee una cuenta? Ingresar'}
-        </Link>
+        <span> ¿Ya tiene una cuenta? 
+          <Link className={styles.signup} to="/">
+            {' Ingresar'}
+          </Link>
+        </span>
+        
         <button
           type="submit"
           className={styles.btn}

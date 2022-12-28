@@ -50,7 +50,7 @@ const Login = () => {
           ref={emailRef}
         />
       </div>
-      <div className={styles.inputPassword}>
+      <div className={styles.input}>
         <label htmlFor="password" className="form-label">
           Contraseña
         </label>
@@ -63,9 +63,12 @@ const Login = () => {
         />
       </div>
       <div className={styles.btnLink}>
-        <Link className={styles.signup} to="/SignUp">
-          {'Aún no posee una cuenta? Crear'}
-        </Link>
+        <span> ¿Aún no posee una cuenta?
+          <Link className={styles.signup} to="/SignUp">
+            {' Crear'}
+          </Link>
+        </span>
+        
         <Link className={styles.signup} to="/loginhelp">
           {'¿Olvidaste tu contraseña?'}
         </Link>

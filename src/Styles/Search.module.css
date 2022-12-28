@@ -1,19 +1,36 @@
 .searchField {
   display: flex;
+  gap: 1rem;
+  margin-right: 2rem;
 }
 
-button {
-  padding: 0.5rem 1.5rem;
-  background-color: #00000000;
+.formControl{
+  background-color: rgb(235, 235, 235);
+  border: solid 2px rgb(36, 65, 132);
+  border-radius: 8px;
+  padding: 0 5px;
+  font-size: smaller;
+}
+
+.formControl:focus {
+  border: solid 2px rgb(55, 83, 149);
+  box-shadow: inset 1px 1px 3px rgb(119, 119, 119);
+}
+
+::placeholder {
+  font-size: smaller;
+  text-align: start;
+}
+
+.icono {
+  padding: 0.5rem 0;
+  background-color: transparent;
   border: none;
-  border-radius: 5rem;
-  text-decoration: none;
-  color: var(--white);
+  color: rgb(189, 189, 189);
 }
 
-button:hover {
-  background-color: #00000050;
+.icono:hover {
   transition: 0.3s;
-  text-decoration: none;
   color: var(--white);
+  filter: drop-shadow(0.5px 0.5px 1px rgb(238, 238, 238));
 }
