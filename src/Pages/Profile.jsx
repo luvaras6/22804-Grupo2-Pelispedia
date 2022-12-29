@@ -4,12 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../Contexts/AuthContext';
 import { getUserById } from '../Services/userService';
+import { useQuery } from '@tanstack/react-query';
 
 const Profile = () => {
   const [showAlert, setShowAlert] = useState(false);
   const { currentUser } = useAuth();
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   const EmailAlert = ({ onClose, onSubmit }) => (
     <div className={styles.alertContainer}>
@@ -56,17 +55,19 @@ const Profile = () => {
     </div>
   );
 
-  useEffect(() => {
-    getUserData();
-  });
-
-  const getUserData = async () => {
-    const p = await getUserById(currentUser.uid);
-    setUserData(p);
-    setLoading(false);
-    //   console.log(p.userNombre);
-    //   console.log(userData.userNombre);
+  const fetchUserInfo = async () => {
+    return currentUser
+      ? await getUserById(currentUser.uid).then((result) => result)
+      : { userNombre: 'usuario' };
   };
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['userInfo'],
+    queryFn: fetchUserInfo,
+    onError: (e) => {
+      console.log(e);
+    },
+  });
 
   const handleOnClose = (e) => {
     e.preventDefault();
@@ -89,7 +90,7 @@ const Profile = () => {
 
   return (
     <>
-      {!loading && (
+      {!isLoading && (
         // (console.log(userData),
         <div className={styles.profileContainers}>
           <h2 className={styles.title}>Perfil</h2>
@@ -97,7 +98,7 @@ const Profile = () => {
           <div className={styles.infoContainer}>
             <div className={styles.infoField}>
               <span className={styles.bold}>Nombre: </span>
-              <span>{userData.userNombre}</span>
+              <span>{data.userNombre}</span>
             </div>
             <div className={styles.infoField}>
               <span className={styles.bold}>Correo: </span>

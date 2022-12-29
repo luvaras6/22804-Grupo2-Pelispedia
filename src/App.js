@@ -30,6 +30,7 @@ const queryClient = new QueryClient({
 const router = createBrowserRouter([
   {
     element: <AuthProvider />,
+    errorElemnt: <Error404 />,
     children: [
       {
         element: <SignInRoute />,

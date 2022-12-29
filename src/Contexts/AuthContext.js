@@ -42,7 +42,7 @@ export function AuthProvider() {
   };
 
   const signIn = async ({ email, password }) => {
-    return signInWithEmailAndPassword(auth, email, password);
+    return await signInWithEmailAndPassword(auth, email, password);
   };
 
   const signOut = async () => {

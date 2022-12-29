@@ -25,11 +25,14 @@ function OffcanvasExample() {
   const fetchUserInfo = async () => {
     return currentUser
       ? await getUserById(currentUser.uid).then((result) => result)
-      : null;
+      : { userNombre: 'usuario' };
   };
   const userInfoQuery = useQuery({
     queryKey: ['userInfo'],
     queryFn: fetchUserInfo,
+    onError: (e) => {
+      console.log(e);
+    },
   });
 
   return (
@@ -79,7 +82,9 @@ function OffcanvasExample() {
                     </Offcanvas.Title>
                   </Offcanvas.Header>
                   <Offcanvas.Body>
-                    <Nav className={`${styles.accesos} justify-content-end flex-grow-1 me-5 `}>
+                    <Nav
+                      className={`${styles.accesos} justify-content-end flex-grow-1 me-5 `}
+                    >
                       <Search />
                       <Link to="/peliculas" className={`${styles.link}`}>
                         Películas
@@ -100,7 +105,10 @@ function OffcanvasExample() {
                             userInfoQuery.data.userNombre}
                         </NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item onClick={handleLogOut} className={`${styles.logOut} pl-1 text-light`}>
+                        <NavDropdown.Item
+                          onClick={handleLogOut}
+                          className={`${styles.logOut} pl-1 text-light`}
+                        >
                           Log out <FiLogOut />
                         </NavDropdown.Item>
                       </NavDropdown>
