@@ -1,48 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Loader } from '../Components/Loader';
-import styles from '../Styles/TrailerPelicula.module.css'
+import styles from '../Styles/TrailerPelicula.module.css';
 import { get } from '../Services/httpClient';
+import { useQuery } from '@tanstack/react-query';
 
 export default function TrailerPelicula() {
+  const { idPelicula } = useParams();
+  // const [trailer, setTrailer] = useState(null);
 
-    const { idPelicula } = useParams();
-    const [cargando, setCargando] = useState(true);
-    const [trailer, setTrailer] = useState(null);
-  
-    //Renderiza cada vez que se actualiza el id de pelicula para mostrar trailer
-    useEffect(() => {
-      //Permite abortar una o más solicitudes DOM cuando lo desee
-      const controller = new AbortController();
-      setCargando(true);
-      get('/movie/' + idPelicula+ '/videos', controller)
-        .then((datos) => {
-          setTrailer(datos);
-          setCargando(false);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-  
-      return () => {
-        controller.abort();
-      };
-    }, [idPelicula]);
+  const fetchMovieTrailer = async () => {
+    const enTrailer = await get('/movie/' + idPelicula + '/videos');
+    const esTrailer = await get(`/movie/${idPelicula}/videos?language=es-MX`);
+    if (esTrailer.results.length > 0) return esTrailer;
+    else return enTrailer;
+  };
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ['trailer'],
+    queryFn: fetchMovieTrailer,
+  });
 
-    if (cargando) {
-        return <Loader />;
-      }
-    
-      if (!trailer) {
-        return null;
-      }
+  useEffect(() => {
+    refetch();
+  }, [idPelicula, refetch]);
 
+  if (isLoading) return <Loader />;
+
+  if (!data) return null;
 
   return (
-    trailer.results.length > 0 &&
-    <div className={styles.container}>
-        <h2>Mirá el trailer: {trailer.results[0].name}</h2>
-        <iframe  src={`https://www.youtube.com/embed/${trailer.results[0].key}`} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title={trailer.results[0].name}></iframe>
-    </div>
-  )
+    data.results.length > 0 && (
+      <div className={styles.container}>
+        <h2>Mirá el trailer: {data.results[0].name}</h2>
+        <iframe
+          src={`https://www.youtube.com/embed/${data.results[0].key}`}
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          title={data.results[0].name}
+        ></iframe>
+      </div>
+    )
+  );
 }

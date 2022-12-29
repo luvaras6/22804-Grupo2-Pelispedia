@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { get } from '../Services/httpClient';
 import { PeliculaCard } from './PeliculaCard';
 import styles from '../Styles/PeliculasGrid.module.css';
@@ -27,14 +27,15 @@ export const PeliculasGrid = ({ search }) => {
     queryFn: fetchFavorites,
   });
 
-  // Cargar lista de peliculas desde TheMovieDB y renderizar búsqueda 
+  // Cargar lista de peliculas desde TheMovieDB y renderizar búsqueda
   const fetchMovies = async ({ pageParam = 1 }) => {
     const busquedaUrl = search
       ? '/search/movie?api_key=10ec06e437cd7ab31ae1e11c3d7f6c8b&query=' +
         search +
         '&page=' +
-        pageParam
-      : '/discover/movie?page=' + pageParam;
+        pageParam +
+        '&language=es-MX'
+      : '/discover/movie?page=' + pageParam + '&language=es-MX';
     return await get(busquedaUrl).then((response) => response);
   };
   const { data, fetchNextPage, hasNextPage, status, refetch } =

@@ -28,7 +28,7 @@ export function DetallePelicula() {
   useEffect(() => {
     const controller = new AbortController();
     setCargando(true);
-    get('/movie/' + idPelicula, controller)
+    get('/movie/' + idPelicula + '?language=es-MX', controller)
       .then((datos) => {
         setPelicula(datos);
         setCargando(false);
