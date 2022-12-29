@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { get } from '../Services/httpClient';
 import { PeliculaCard } from './PeliculaCard';
 import styles from '../Styles/PeliculasGrid.module.css';
@@ -18,9 +18,10 @@ export const FavoritosGrid = () => {
     return get(busquedaUrl, controller); //realiza un fetch a la api de peliculas para traer los datos de la peli
   };
 
-  const getPeliculasFavoritas = () => {
+  const getPeliculasFavoritas = useCallback(() => {
     setCargando(true);
-    getFavorito(currentUser.uid).then((resultado) => { //obtiene los favoritos correspondientes al usuario logueado
+    getFavorito(currentUser.uid).then((resultado) => {
+      //obtiene los favoritos correspondientes al usuario logueado
       const idfavs = [...new Set(resultado)]; //evita guardar en el set duplicados
       const promises = [];
       const favs = [];
@@ -35,19 +36,19 @@ export const FavoritosGrid = () => {
       }
 
       //para poder controlar que el loading se apague cuando se hayan cumplido todas las promesas (todas las peliculas favoritas)
-      Promise.all(promises).then( //objeto que permite controlar que los sets se ejecuten una vez que terminen todos los detalles de peliculas (promesas)
+      Promise.all(promises).then(
+        //objeto que permite controlar que los sets se ejecuten una vez que terminen todos los detalles de peliculas (promesas)
         () => {
           setPeliculas(favs);
           setCargando(false);
         }
       );
     });
-  }
-
+  }, [currentUser]);
 
   useEffect(() => {
     getPeliculasFavoritas();
-  })
+  }, [getPeliculasFavoritas]);
 
   if (!peliculas.length) {
     return (
