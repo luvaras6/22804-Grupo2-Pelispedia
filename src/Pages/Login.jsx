@@ -15,9 +15,6 @@ const Login = () => {
   //Hook que nos ayuda a manejar los estados de la petición(success, error or pending)
   const mutation = useMutation({
     mutationFn: signIn,
-    onSuccess: () => {
-      <Navigate to={'/peliculas'} />;
-    },
     onError: (error) => {
       return setError(authErrors[error.code] || error.code);
     },
